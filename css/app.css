@@ -1,0 +1,23 @@
+body {
+  margin-top: 3.5rem;
+}
+h1, h2, h3 {
+  font-family: "Montserrat", sans-serif;
+}
+
+@media (min-width: 576px) {
+  .jumbotron {
+    padding: 4rem;
+  }
+}
+.jumbotron {
+  margin-bottom: 1rem;
+}
+.navbar-brand {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  color: white !important;
+}
+.nav-link {
+  text-transform: uppercase;
+}

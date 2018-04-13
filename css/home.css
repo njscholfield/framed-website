@@ -1,5 +1,5 @@
-h1, h2, h3 {
-  font-family: "Montserrat", sans-serif;
+body {
+  margin-top: 0;
 }
 
 .bg-transparent {
@@ -7,14 +7,6 @@ h1, h2, h3 {
 }
 .bg-black {
   background-color: rgba(10,10,10,.8);
-}
-.navbar-brand {
-  font-family: "Montserrat", sans-serif;
-  text-transform: uppercase;
-  color: white !important;
-}
-.nav-link {
-  text-transform: uppercase;
 }
 .full-image {
   width: 100%;
