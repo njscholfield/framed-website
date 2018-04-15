@@ -51,23 +51,23 @@
               <fieldset>
                 <div class="form-group">
                   <label>Name</label>
-                  <input class="form-control" name="name" type="text" required>
+                  <input class="form-control" name="name" type="text" placeholder="Milky Way Galaxy" required>
                 </div>
                 <div class="form-group">
                   <label>Photographer</label>
-                  <input class="form-control" name="photographer" type="text" required>
+                  <input class="form-control" name="photographer" type="text" placeholder="John Smith" required>
                 </div>
                 <div class="form-group">
                   <label>Category</label>
-                  <input class="form-control" name="category" type="text" required>
+                  <input class="form-control" name="category" type="text" placeholder="space" required>
                 </div>
                 <div class="form-group">
                   <label>Color</label>
-                  <input class="form-control" name="color" type="text" required>
+                  <input class="form-control" name="color" type="text" placeholder="blue" required>
                 </div>
                 <div class="form-group">
                   <label>Image URL</label>
-                  <input class="form-control" name="imageURL" type="url" required>
+                  <input class="form-control" name="imageURL" type="url" placeholder="https://source.unsplash.com/..." required>
                 </div>
                 <div class="form-group">
                   <label>Description</label>
