@@ -7,7 +7,6 @@
     <title>Item Page | Framed </title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,900" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/yeti/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha256-NJWeQ+bs82iAeoT5Ktmqbi3NXwxcHlfaVejzJI2dklU=" crossorigin="anonymous" /> -->
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="/css/item.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
@@ -32,48 +31,48 @@
         </ul>
       </div>
     </nav>
-    <div class="jumbotron">
-      <div class="container">
-        <h1 class="display-4">Store</h1>
-      </div>
-    </div>
     <div class="container">
-      <div class="row align-items-stretch">
-        <?php 
-          $itemID = $_GET['id'];
-          $connection = mysqli_connect("127.0.0.1", "njscholf_labs", "CS 334 Labs", "njscholf_cs334");
-          if (!$connection) {
-            echo "Error: Unable to connect to MySQL." . PHP_EOL;
-            echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
-            echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
-            exit;
-          }
-          $query = "SELECT * FROM products WHERE productID = ".$itemID;
-          $result = mysqli_query($connection, $query);
-          
-          if($result) {
-            $row = mysqli_fetch_assoc($result);
-            print <<<HERE
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-3">
-              <div class="card">
-                <img class="card-img-top" src="{$row['imageURL']}/500x500/" alt="{$row['name']}">
-                <div class="card-body">
-                  <h5 class="card-title">{$row['name']}</h5>
-                  <h6 class="text-muted">By {$row['photographer']}</h6>
-                  <p class="card-text">{$row['description']}</p>
-                  <a href="/item/?id={$row['productID']}" class="btn btn-primary">Details</a>
-                </div>
+      <?php 
+        $itemID = $_GET['id'];
+        $connection = mysqli_connect("127.0.0.1", "njscholf_labs", "CS 334 Labs", "njscholf_cs334");
+        if (!$connection) {
+          echo "Error: Unable to connect to MySQL." . PHP_EOL;
+          echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+          echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+          exit;
+        }
+        $query = "SELECT * FROM products WHERE productID = ".$itemID;
+        $result = mysqli_query($connection, $query);
+        
+        if($result) {
+          $row = mysqli_fetch_assoc($result);
+          print <<<HERE
+          <div class="row">
+            <div class="col-md-6 img-container">
+              <img id="js-img-item" class="none" src="{$row['imageURL']}" alt="{$row['name']}">
+              <div class="btn-tray">
+                <button data-class="wood-border" class="btn btn-dark border-toggle">Wood</button>
+                <button data-class="gray-border" class="btn btn-dark border-toggle">Gray</button>
+                <button data-class="none" class="btn btn-dark border-toggle">None</button>
               </div>
             </div>
+            <div class="col-md-6 img-container">
+              <div class="text-center">
+                <h1>{$row['name']}</h1>
+                <h3 class="text-muted">{$row['photographer']}</h3>
+                <p>{$row['description']}</p>
+              </div>
+            </div>
+          </div>
 HERE;
-          } else {
-            echo '<h4 class="text-primary">Invalid product id. Try again!</h4>';
-          }
-          mysqli_close($connection);
-        ?>
-      </div>
+        } else {
+          echo '<h4 class="text-primary">Invalid product id. Try again!</h4>';
+        }
+        mysqli_close($connection);
+      ?>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha256-C8oQVJ33cKtnkARnmeWp6SDChkU+u7KvsNMFUzkkUzk=" crossorigin="anonymous"></script>
+    <script src="/js/border.js"></script>
   </body>
 </html>

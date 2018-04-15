@@ -1,0 +1,36 @@
+.img-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
+  max-height: 70vh;
+}
+.img-container img {
+   max-width: 100%;
+   height: auto;
+   box-sizing: content-box;
+   margin: .5rem;
+}
+.row {
+  min-height: 70vh;
+}
+.btn-tray {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* Border Styles */
+.none {
+  border: 1rem solid transparent;
+}
+.wood-border {
+  border-width: 1rem;
+  border-style: solid;
+  border-image: url("https://images.pexels.com/photos/326311/pexels-photo-326311.jpeg?auto=compress&cs=tinysrgb&h=350") 20 / 1rem / 0 stretch
+}
+.gray-border {
+  border: 1rem solid #333;
+}
