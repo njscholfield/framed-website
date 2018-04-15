@@ -3,14 +3,13 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 2rem;
+  padding: 1rem;
   max-height: 70vh;
 }
 .img-container img {
    max-width: 100%;
-   height: auto;
+   max-height: calc(100% - 5.6rem);
    box-sizing: content-box;
-   margin: .5rem;
 }
 .row {
   min-height: 70vh;
@@ -19,7 +18,7 @@
   display: flex;
   justify-content: space-around;
   width: 100%;
-  margin-top: 1rem;
+  margin-top: .5rem;
 }
 
 /* Border Styles */
