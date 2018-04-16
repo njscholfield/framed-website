@@ -38,24 +38,6 @@
       </div>
     </div>
     <div class="container">
-      <button class="btn btn-link" onclick="$('#filter-options').toggleClass('d-none')">Filter <span class="fas fa-chevron-down"></span></button>
-      <div id="filter-options" class="d-none">
-        <ul>
-          <li>Category
-            <ul>
-              <li><span class="badge badge-pill badge-light"><a href="/store/?category=space">space</a></span><a href="/store/?category=test"><span class="badge badge-pill badge-light">test</span></a></li>
-            </ul>
-          </li>
-          <li>Color
-            <ul>
-              <li><a href="/store/?color=blue">blue</a></li>
-              <li><a href="/store/?color=gray">gray</a></li>
-            </ul>
-          </li>
-        </ul>
-        <a class="btn btn-sm btn-dark" href="/store/">&times; clear</a>
-      </div>
-      <div class="row align-items-stretch">
         <?php 
           $connection = mysqli_connect("127.0.0.1", "njscholf_labs", "CS 334 Labs", "njscholf_cs334");
           if (!$connection) {
@@ -66,6 +48,8 @@
           }
           
           $query = "SELECT * FROM products";
+          $colorsQ = "SELECT DISTINCT color FROM products";
+          $categoriesQ = "SELECT DISTINCT category FROM products";
           
           if(isset($_GET['category'])) {
             $query .= " WHERE category='{$_GET['category']}'";
@@ -75,6 +59,13 @@
           $results = mysqli_query($connection, $query);
           
           if($results) {
+            $colors = mysqli_query($connection, $colorsQ);
+            $categories = mysqli_query($connection, $categoriesQ);
+  
+            // filter results
+            print_filter_box($colors, $categories);
+            
+            echo '<div class="row align-items-stretch">';
             while($row = mysqli_fetch_assoc($results)) {
               print <<<HERE
               <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-3">
@@ -95,8 +86,23 @@ HERE;
             echo '<h4 class="text-primary">No products to show</h4>';
           }
           mysqli_close($connection);
+          
+          function print_filter_box($colors, $categories) {
+            print <<<HERE
+            <button class="btn btn-link" onclick="$('#filter-options').toggleClass('d-none')">Filter <span class="fas fa-chevron-down"></span></button>
+            <div id="filter-options" class="d-none"><ul><li>Category<ul><li>
+HERE;
+              while($catName = mysqli_fetch_array($categories)) {
+                echo "<span class=\"badge badge-pill badge-light\"><a href=\"/store/?category={$catName[0]}\">{$catName[0]}</a></span>";
+              }
+              echo "</li></ul></li><li>Color<ul><li>";
+              while($colorName = mysqli_fetch_array($colors)) {
+                echo "<span class=\"badge badge-pill badge-light\"><a href=\"/store/?color={$colorName[0]}\">{$colorName[0]}</a></span>";
+              }
+              echo "</li></ul></li></ul><a class=\"btn btn-sm btn-dark\" href=\"/store/\">&times; clear</a></div>";
+          }
         ?>
-      </div>
+      </div> <!-- /.row -->
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha256-C8oQVJ33cKtnkARnmeWp6SDChkU+u7KvsNMFUzkkUzk=" crossorigin="anonymous"></script>
