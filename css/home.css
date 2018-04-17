@@ -13,8 +13,8 @@ body {
   height: 100vh;
   background-color: #333;
   background-image: url("https://source.unsplash.com/collection/1953059/1600x900");
-  /* background-image: url("https://source.unsplash.com/eNoeWZkO7Zc/1600x900"); */
   background-size: cover;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
