@@ -62,15 +62,16 @@
             <div class="col-md-6 img-container">
               <img id="js-img-item" class="none" src="{$row['imageURL']}" alt="{$row['name']}">
               <div class="btn-tray">
-                <button data-class="wood-border" class="btn btn-dark border-toggle">Wood</button>
-                <button data-class="gray-border" class="btn btn-dark border-toggle">Gray</button>
-                <button data-class="none" class="btn btn-dark border-toggle">None</button>
+                <button data-class="wood-border" data-price="5" class="btn btn-dark border-toggle">Wood</button>
+                <button data-class="gray-border" data-price="3" class="btn btn-dark border-toggle">Gray</button>
+                <button data-class="none" data-price="0" class="btn btn-dark border-toggle">None</button>
               </div>
             </div>
             <div class="col-md-6 img-container">
               <div class="text-center">
                 <h1>{$row['name']}</h1>
                 <h3 class="text-muted">{$row['photographer']}</h3>
+                <h5 id="js-price">$10</h5>
                 <p>{$row['description']}</p>
               </div>
             </div>
