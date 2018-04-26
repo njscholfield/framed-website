@@ -56,7 +56,9 @@
           if (filter_has_var(INPUT_GET, "username")){
             displayResults();
           } else {
-            displayForm();
+            $_GET['username'] = 'njs69';
+            displayResults();
+            // displayForm();
           }
         
           function displayForm() {
