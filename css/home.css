@@ -1,13 +1,6 @@
 body {
   margin-top: 0;
 }
-footer {
-  background-color: #0a0a0a;
-  color: white;
-  margin: 0;
-  padding: 1rem;
-}
-
 .bg-transparent {
   background-color: transparent;
 }

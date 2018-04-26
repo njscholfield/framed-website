@@ -4,6 +4,14 @@ body {
 h1, h2, h3 {
   font-family: "Montserrat", sans-serif;
 }
+footer {
+  background: #333;
+  padding: .5rem 1rem;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+}
 
 @media (min-width: 576px) {
   .jumbotron {
