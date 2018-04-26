@@ -8,9 +8,18 @@ footer {
   background: #333;
   padding: .5rem 1rem;
   color: white;
-  border: none;
-  display: flex;
   align-items: center;
+  margin-top: .5rem;
+}
+footer p {
+  margin-bottom: 0;
+}
+footer h6 {
+  text-align: right;
+  margin-bottom: 0;
+}
+.f-pusher {
+  min-height: calc(100vh - 6.4rem);
 }
 
 @media (min-width: 576px) {

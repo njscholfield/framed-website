@@ -11,7 +11,7 @@
    max-height: calc(100% - 5.6rem);
    box-sizing: content-box;
 }
-.row {
+.container .row {
   min-height: 70vh;
 }
 .btn-tray {

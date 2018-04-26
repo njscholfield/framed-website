@@ -12,6 +12,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
   </head>
   <body>
+    <div class="f-pusher">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
       <a class="navbar-brand" href="/"><span class="far fa-images"></span> Framed</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -113,9 +114,12 @@ HERE;
         ?>
       </div> <!-- /.row -->
     </div>
+  </div>
     <footer>
-      <p class="col-even">Images from <a href="https://unsplash.com/collections/1953059/framed" target="_blank" rel="noopener noreferrer">Unsplash</a></p>
-      <h4 class="col-even">Designed and built by <a href="https://noahscholfield.com/" target="_blank">Noah Scholfield</h4>
+      <div class="row">
+        <p class="col">Images from <a href="https://unsplash.com/collections/1953059/framed" target="_blank" rel="noopener noreferrer">Unsplash</a></p>
+        <h6 class="col">Designed and built by <a href="https://noahscholfield.com/" target="_blank">Noah Scholfield</h6>
+        </div>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha256-C8oQVJ33cKtnkARnmeWp6SDChkU+u7KvsNMFUzkkUzk=" crossorigin="anonymous"></script>
