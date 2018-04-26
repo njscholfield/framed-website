@@ -77,6 +77,8 @@
                   <h3 class="text-muted">{$row['photographer']}</h3>
                   <h5 id="js-price">$10</h5>
                   <p>{$row['description']}</p>
+                  <a class="btn btn-success" href="#"><span class="fas fa-heart"></span> Favorite</a>
+                  <a class="btn btn-primary" href="#"><span class="fas fa-cart-plus"></span> Add to Cart</a>
                 </div>
               </div>
             </div>
