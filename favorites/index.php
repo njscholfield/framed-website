@@ -102,6 +102,8 @@ HERE;
                       <h6 class="text-muted">By {$row['photographer']}</h6>
                       <span class="badge badge-pill badge-success">{$row['category']}</span>
                       <p class="card-text">{$row['description']}</p>
+                    </div>
+                    <div class="card-footer">
                       <a href="/item/?id={$row['productID']}" class="btn btn-primary">Details</a>
                     </div>
                   </div>
