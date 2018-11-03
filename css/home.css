@@ -9,8 +9,8 @@ footer {
 .bg-transparent {
   background-color: transparent;
 }
-.bg-black {
-  background-color: rgba(10,10,10,.8);
+.bg-dark {
+  background-color: rgba(10,10,10,.8) !important;
 }
 .full-image {
   width: 100%;
