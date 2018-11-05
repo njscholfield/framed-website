@@ -4,8 +4,9 @@
     <?php 
       DEFINE("PAGE_TITLE", "Store");
       require('../partials/head.php');
+      require('../partials/itemCard.php');
     ?>
-    <link rel="stylesheet" href="/css/store.css">
+    <link rel="stylesheet" href="<?php path('/css/store.css'); ?>">
   </head>
   <body>
     <div class="f-pusher">
@@ -17,6 +18,7 @@
       </div>
       <div class="container">
           <?php 
+            $ROOT = ROOT;
             require('../partials/database.php');
             $query = "SELECT * FROM products";
             $colorsQ = "SELECT DISTINCT color FROM products";
@@ -36,47 +38,31 @@
               // filter results
               print_filter_box($colors, $categories);
               
-              echo '<div class="row align-items-stretch">';
-              while($row = mysqli_fetch_assoc($results)) {
-                print <<<HERE
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-3">
-                  <div class="card">
-                    <img class="card-img-top" src="{$row['imageURL']}/500x500/" alt="{$row['name']}">
-                    <div class="card-body">
-                      <h5 class="card-title">{$row['name']}</h5>
-                      <h6 class="text-muted">By {$row['photographer']}</h6>
-                      <span class="badge badge-pill badge-success">{$row['category']}</span>
-                      <p class="card-text">{$row['description']}</p>
-                    </div>
-                    <div class="card-footer">
-                      <a href="/item/?id={$row['productID']}" class="btn btn-primary">Details</a>
-                    </div>
-                  </div>
-                </div>
-HERE;
-              }
+              printItemCards($results);
+              
             } else {
               echo '<h4 class="text-primary">No products to show</h4>';
             }
             mysqli_close($connection);
             
             function print_filter_box($colors, $categories) {
+              $ROOT = ROOT;
               print <<<HERE
               <button class="btn btn-link" onclick="$('#filter-options').toggleClass('d-none')">Filter <span class="fas fa-chevron-down"></span></button>
               <div id="filter-options" class="d-none"><ul><li>Category<ul><li>
 HERE;
                 while($catName = mysqli_fetch_array($categories)) {
-                  echo "<span class=\"badge badge-pill badge-light\"><a href=\"/store/?category={$catName[0]}\">{$catName[0]}</a></span>";
+                  echo "<span class=\"badge badge-pill badge-light\"><a href=\"$ROOT/store/?category={$catName[0]}\">{$catName[0]}</a></span>";
                 }
                 echo "</li></ul></li><li>Color<ul><li>";
                 while($colorName = mysqli_fetch_array($colors)) {
-                  echo "<span class=\"badge badge-pill badge-light\"><a href=\"/store/?color={$colorName[0]}\">{$colorName[0]}</a></span>";
+                  echo "<span class=\"badge badge-pill badge-light\"><a href=\"$ROOT/store/?color={$colorName[0]}\">{$colorName[0]}</a></span>";
                 }
-                echo "</li></ul></li></ul><a class=\"btn btn-sm btn-dark\" href=\"/store/\">&times; clear</a></div>";
+                echo "</li></ul></li></ul><a class=\"btn btn-sm btn-dark\" href=\"$ROOT/store/\">&times; clear</a></div>";
             }
           ?>
         </div> <!-- /.row -->
-        <a class="btn btn-success" href="/add-item/">+ New Item</a>
+        <a class="btn btn-success" href="<?php path('/add-item/'); ?>">+ New Item</a>
       </div>
     </div>
     <?php include('../partials/footer.php'); ?>
