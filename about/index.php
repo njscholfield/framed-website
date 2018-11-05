@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <?php 
-      $pageTitle = "About";
+    <?php
+      DEFINE("PAGE_TITLE", "About");
       require('../partials/head.php');
     ?>
-    <link rel="stylesheet" href="/css/about.css">
+    <link rel="stylesheet" href="<?php path('/css/about.css'); ?>">
   </head>
   <body>
     <div class="f-pusher">

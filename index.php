@@ -2,10 +2,10 @@
 <html>
   <head>
     <?php
-      $pageTitle = 'Home';
+      DEFINE("PAGE_TITLE", "Home");
       require('./partials/head.php');
     ?>
-    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="<?php path('/css/home.css'); ?>">
   </head>
   <body>
     <?php include('./partials/navbar.php'); ?>

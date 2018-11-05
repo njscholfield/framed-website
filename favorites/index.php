@@ -2,10 +2,10 @@
 <html>
   <head>
     <?php 
-      $pageTitle = "Favorites";
+      DEFINE("PAGE_TITLE", "Favorites");
       require('../partials/head.php');
     ?>
-    <link rel="stylesheet" href="/css/store.css">
+    <link rel="stylesheet" href="<?php path('/css/store.css'); ?>">
   </head>
   <body>
     <div class="f-pusher">

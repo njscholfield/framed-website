@@ -2,10 +2,10 @@
 <html>
   <head>
     <?php 
-      $pageTitle = "Add Item";
+      DEFINE("PAGE_TITLE", "Add Item");
       require('../partials/head.php');
     ?>
-    <link rel="stylesheet" href="/css/item.css">
+    <link rel="stylesheet" href="<?php path('/css/item.css'); ?>">
   </head>
   <body>
     <div class="f-pusher">

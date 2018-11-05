@@ -2,7 +2,7 @@
 <html>
   <head>
     <?php 
-      $pageTitle = "Store";
+      DEFINE("PAGE_TITLE", "Store");
       require('../partials/head.php');
     ?>
     <link rel="stylesheet" href="/css/store.css">

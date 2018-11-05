@@ -2,10 +2,10 @@
 <html>
   <head>
     <?php 
-      $pageTitle = "Item";
+      define("PAGE_TITLE", "Item");
       require('../partials/head.php');
     ?>
-    <link rel="stylesheet" href="/css/item.css">
+    <link rel="stylesheet" href="<?php path('/css/item.css'); ?>">
   </head>
   <body>
     <div class="f-pusher">
@@ -49,6 +49,6 @@ HERE;
       </div>
     </div>
     <?php include('../partials/footer.php'); ?>
-    <script src="/js/border.js"></script>
+    <script src="<?php path('/js/border.js'); ?>"></script>
   </body>
 </html>
