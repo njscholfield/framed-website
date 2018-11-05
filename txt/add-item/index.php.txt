@@ -60,7 +60,7 @@ HERE;
           }
         
           function addItem() {
-            @$db = new mysqli("127.0.0.1", "njscholf_labs", "CS 334 Labs", "njscholf_cs334");
+            @$db = new mysqli(HOSTNAME, USERNAME, PASSWORD, USERNAME);
             if (mysqli_connect_errno()) {
               echo '<h4 class="text-danger">Error: Could not connect to database.</h4>';
               exit;
