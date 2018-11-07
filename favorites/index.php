@@ -22,10 +22,12 @@
           if (filter_has_var(INPUT_GET, "username")){
             // ALSO NEED TO CHECK IF FAVORITES ARE PUBLIC AND SHOW ACCESS DENIED
             displayResults();
-          } else {
+          } elseif(isset($_SESSION) && isset($_SESSION['username'])) {
             $_GET['username'] = $_SESSION['username'];
-            // ALSO NEED TO HANDLE IF THE USER IS LOGGED OUT AND JUST GOES TO /FAVORITES/
             displayResults();
+          } else {
+            echo '<h4 class="text-info">Please login or specify a username to view favorites</h4>';
+            die();
           }
         
           function displayResults() {
