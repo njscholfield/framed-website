@@ -14,6 +14,8 @@
     echo "<title>".PAGE_TITLE." | Framed</title>";
   }
 ?>
+<link rel="shortcut icon" href="<?php path('/favicon.ico'); ?>" />
+<link rel="icon" sizes="16x16 32x32" href="<?php path('/favicon.ico'); ?>">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,900" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.3/yeti/bootstrap.min.css" integrity="sha256-W2ya1Ygm18l60afsKnKMJEJDN/LjR4hn1kK3ngv/J4o=" crossorigin="anonymous">
 <link rel="stylesheet" href="<?php path('/css/app.css'); ?>">
