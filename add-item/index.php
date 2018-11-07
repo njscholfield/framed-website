@@ -67,7 +67,7 @@ HERE;
               exit;
             }
             
-            $query = "INSERT INTO products VALUES(NULL, ?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO FramedProducts VALUES(NULL, ?, ?, ?, ?, ?, ?)";
             $stmt = $db->prepare($query);
             $stmt->bind_param('ssssss', $_POST['name'], $_POST['photographer'], $_POST['category'], $_POST['color'], $_POST['imageURL'], $_POST['description']);
             $stmt->execute();

@@ -21,9 +21,9 @@
           <?php 
             $ROOT = ROOT;
             require('../partials/database.php');
-            $query = "SELECT * FROM products";
-            $colorsQ = "SELECT DISTINCT color FROM products";
-            $categoriesQ = "SELECT DISTINCT category FROM products";
+            $query = "SELECT * FROM FramedProducts";
+            $colorsQ = "SELECT DISTINCT color FROM FramedProducts";
+            $categoriesQ = "SELECT DISTINCT category FROM FramedProducts";
             
             if(isset($_GET['category'])) {
               $query .= " WHERE category='{$_GET['category']}'";

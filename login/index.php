@@ -21,7 +21,7 @@
           require('../partials/database.php');
 
           // Query database and check username and password
-          $query = "SELECT customerId as id, userid as username FROM customer WHERE userid = '{$_POST['username']}' AND password = '{$_POST['password']}';";
+          $query = "SELECT userID, username FROM FramedUsers WHERE username = '{$_POST['username']}' AND password = '{$_POST['password']}';";
           $result = mysqli_query($connection, $query);
 
           if(!$result || mysqli_num_rows($result) == 0) {
@@ -34,7 +34,7 @@
             $user = mysqli_fetch_assoc($result);
             $_SESSION['loggedIn'] = true;
             $_SESSION['username'] = $user['username'];
-            $_SESSION['id'] = $user['id'];
+            $_SESSION['userID'] = $user['userID'];
             mysqli_free_result($result);
             mysqli_close($connection);
             echo '<meta http-equiv="refresh" content="0;URL=../">'; // redirect to profile page

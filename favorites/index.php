@@ -24,17 +24,18 @@
             displayResults();
           } else {
             $_GET['username'] = $_SESSION['username'];
+            // ALSO NEED TO HANDLE IF THE USER IS LOGGED OUT AND JUST GOES TO /FAVORITES/
             displayResults();
           }
         
           function displayResults() {
             require('../partials/database.php');
             
-            $query = "SELECT products.productID, name, photographer, category, color, imageURL, description FROM products JOIN favorites JOIN users WHERE products.productID = favorites.productID && users.userID = favorites.userID && username = '{$_GET['username']}'";
+            $query = "SELECT FramedProducts.productID, name, photographer, category, color, imageURL, description FROM FramedProducts JOIN FramedFavorites JOIN FramedUsers WHERE FramedProducts.productID = FramedFavorites.productID && FramedUsers.userID = FramedFavorites.userID && username = '{$_GET['username']}'";
             
             $results = mysqli_query($connection, $query);
             
-            if($results) {
+            if($results && mysqli_num_rows($results) != 0) {
               printItemCards($results);
             } else {
               echo '<h4 class="text-primary">No products to show</h4>';

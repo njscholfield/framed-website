@@ -15,7 +15,7 @@
         <?php 
           $itemID = $_GET['id'];
           require('../partials/database.php');
-          $query = "SELECT * FROM products WHERE productID = $itemID";
+          $query = "SELECT * FROM FramedProducts WHERE productID = $itemID";
           $result = mysqli_query($connection, $query);
           
           if($result && mysqli_num_rows($result) != 0) {
