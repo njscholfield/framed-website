@@ -14,20 +14,25 @@
       <li class="nav-item">
         <a class="nav-link <?php if(PAGE_TITLE == 'Store') echo 'active'; ?>" href="<?php path('/store/'); ?>">Store</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link <?php if(PAGE_TITLE == 'Favorites') echo 'active'; ?>" href="<?php path('/favorites/'); ?>">Favorites</a>
-      </li>
     </ul>
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#"><span title="Follow us on Instagram!" class="fab fa-instagram"></span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><span title="Follow us on Twitter!" class="fab fa-twitter"></span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><span title="Like us on Facebook!" class="fab fa-facebook-f"></span></a>
-      </li>
+      <?php if(isset($_SESSION) && $_SESSION['loggedIn'] == true): ?>
+        <li class="nav-item">
+          <span class="navbar-text"><span class="fas fa-user"></span> <?php echo $_SESSION['username']; ?></span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?php path('/cart/'); ?>"><span title="See what's in your cart" class="fas fa-shopping-cart"></span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?php path('/favorites/'); ?>"><span title="View your favorites" class="fas fa-heart"></span></a>
+        </li>
+        
+      <?php else: ?>
+        <div class="ml-auto">
+          <a class="btn btn-secondary navbar-btn" href="<?php path('/login/'); ?>">Sign In</a>
+          <a class="btn btn-success navbar-btn" href="<?php path('/register/'); ?>">Register</a>
+        </div>
+      <?php endif; ?>
     </ul>
   </div>
 </nav>
