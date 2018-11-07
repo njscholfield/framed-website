@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,10 +15,10 @@
         <?php 
           $itemID = $_GET['id'];
           require('../partials/database.php');
-          $query = "SELECT * FROM products WHERE productID = ".$itemID;
+          $query = "SELECT * FROM products WHERE productID = $itemID";
           $result = mysqli_query($connection, $query);
           
-          if($result) {
+          if($result && mysqli_num_rows($result) != 0) {
             $row = mysqli_fetch_assoc($result);
             print <<<HERE
             <div class="row">
