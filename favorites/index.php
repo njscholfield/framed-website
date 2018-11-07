@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -19,27 +20,11 @@
     <div class="container">
         <?php 
           if (filter_has_var(INPUT_GET, "username")){
+            // ALSO NEED TO CHECK IF FAVORITES ARE PUBLIC AND SHOW ACCESS DENIED
             displayResults();
           } else {
-            $_GET['username'] = 'njs69';
+            $_GET['username'] = $_SESSION['username'];
             displayResults();
-            // displayForm();
-          }
-        
-          function displayForm() {
-            print <<<HERE
-            <form action="" method="GET">
-              <fieldset>
-                <div class="form-group">
-                  <label>Username</label>
-                  <input class="form-control" type="text" name="username" required>
-                </div>
-              </fieldset>
-              <div class="form-group">
-                <button class="btn btn-primary">Search</button>
-              </div>
-            </form>
-HERE;
           }
         
           function displayResults() {
