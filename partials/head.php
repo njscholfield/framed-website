@@ -16,7 +16,7 @@
 ?>
 <link rel="shortcut icon" href="<?php path('/favicon.ico'); ?>" />
 <link rel="icon" sizes="16x16 32x32" href="<?php path('/favicon.ico'); ?>">
-<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,900" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700,900" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.3/yeti/bootstrap.min.css" integrity="sha256-W2ya1Ygm18l60afsKnKMJEJDN/LjR4hn1kK3ngv/J4o=" crossorigin="anonymous">
 <link rel="stylesheet" href="<?php path('/css/app.css'); ?>">
 <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
