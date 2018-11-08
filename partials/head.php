@@ -1,5 +1,5 @@
 <?php
-  require('env.php');
+  include('env.php');
   function path($path) {
     echo ROOT.$path;
   }
