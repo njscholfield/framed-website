@@ -21,17 +21,20 @@
           require('../partials/database.php');
 
           // Query database and check username and password
-          $query = "SELECT userID, username FROM FramedUsers WHERE username = '{$_POST['username']}' AND password = '{$_POST['password']}';";
+          $sanitizedUsername = mysqli_escape_string($connection, $_POST['username']);
+          $query = "SELECT userID, username, password FROM FramedUsers WHERE username = '{$sanitizedUsername}';";
           $result = mysqli_query($connection, $query);
-
+          
           if(!$result || mysqli_num_rows($result) == 0) {
-            // Display error if no results are found
-            echo "<h5 class=\"text-danger\">Invalid username or password!</h5>";
-            mysqli_free_result($result);
-            mysqli_close($connection);
+            // if username is incorrect (not found)
+            $authSuccessful = false;
           } else {
-            // Save userID and username to session and redirect
             $user = mysqli_fetch_assoc($result);
+            $authSuccessful = (password_verify($_POST['password'], $user['password'])) ? true : false; // checks the password
+          }
+
+          if($authSuccessful) {
+            // Save userID and username to session and redirect
             $_SESSION['loggedIn'] = true;
             $_SESSION['username'] = $user['username'];
             $_SESSION['userID'] = $user['userID'];
@@ -39,6 +42,11 @@
             mysqli_close($connection);
             echo '<meta http-equiv="refresh" content="0;URL=../">'; // redirect to profile page
             die();
+          } else {
+            // Display error if no results are found
+            echo "<h5 class=\"text-danger\">Invalid username or password!</h5>";
+            mysqli_free_result($result);
+            mysqli_close($connection);
           }
         }
       ?>
