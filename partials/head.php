@@ -1,7 +1,9 @@
 <?php
-  include('env.php');
+  if(!isset($_ENV['SERVER_ROOT'])) {
+    require('env.php');
+  }
   function path($path) {
-    echo ROOT.$path;
+    echo $_ENV['SERVER_ROOT'].$path;
   }
 ?>
 <meta charset="utf-8">

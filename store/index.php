@@ -18,8 +18,7 @@
         </div>
       </div>
       <div class="container">
-          <?php 
-            $ROOT = ROOT;
+          <?php
             require('../partials/database.php');
             $query = "SELECT * FROM FramedProducts";
             $colorsQ = "SELECT DISTINCT color FROM FramedProducts";
@@ -47,19 +46,18 @@
             mysqli_close($connection);
             
             function print_filter_box($colors, $categories) {
-              $ROOT = ROOT;
               print <<<HERE
               <button class="btn btn-link" onclick="$('#filter-options').toggleClass('d-none')">Filter <span class="fas fa-chevron-down"></span></button>
               <div id="filter-options" class="d-none"><ul><li>Category<ul><li>
 HERE;
                 while($catName = mysqli_fetch_array($categories)) {
-                  echo "<span class=\"badge badge-pill badge-light\"><a href=\"$ROOT/store/?category={$catName[0]}\">{$catName[0]}</a></span>";
+                  echo "<span class=\"badge badge-pill badge-light\"><a href=\"{$_ENV['SERVER_ROOT']}/store/?category={$catName[0]}\">{$catName[0]}</a></span>";
                 }
                 echo "</li></ul></li><li>Color<ul><li>";
                 while($colorName = mysqli_fetch_array($colors)) {
-                  echo "<span class=\"badge badge-pill badge-light\"><a href=\"$ROOT/store/?color={$colorName[0]}\">{$colorName[0]}</a></span>";
+                  echo "<span class=\"badge badge-pill badge-light\"><a href=\"{$_ENV['SERVER_ROOT']}/store/?color={$colorName[0]}\">{$colorName[0]}</a></span>";
                 }
-                echo "</li></ul></li></ul><a class=\"btn btn-sm btn-dark\" href=\"$ROOT/store/\">&times; clear</a></div>";
+                echo "</li></ul></li></ul><a class=\"btn btn-sm btn-dark\" href=\"{$_ENV['SERVER_ROOT']}/store/\">&times; clear</a></div>";
             }
           ?>
         </div> <!-- /.row -->

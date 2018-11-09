@@ -16,7 +16,7 @@
       </li>
     </ul>
     <ul class="navbar-nav">
-      <?php if(isset($_SESSION) && $_SESSION['loggedIn'] == true): ?>
+      <?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true): ?>
         <li class="nav-item">
           <span class="navbar-text"><span class="fas fa-user"></span> <?php echo $_SESSION['username']; ?></span>
         </li>

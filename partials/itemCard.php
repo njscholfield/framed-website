@@ -1,6 +1,5 @@
 <?php 
   function printItemCards($results) {
-    $ROOT = ROOT;
     echo '<div class="row align-items-stretch">';
     while($row = mysqli_fetch_assoc($results)) {
       print <<<HERE
@@ -14,7 +13,7 @@
             <p class="card-text">{$row['description']}</p>
           </div>
           <div class="card-footer">
-            <a href="$ROOT/item/?id={$row['productID']}" class="btn btn-primary">Details</a>
+            <a href="{$_ENV['SERVER_ROOT']}/item/?id={$row['productID']}" class="btn btn-primary">Details</a>
           </div>
         </div>
       </div>

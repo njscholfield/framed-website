@@ -61,7 +61,7 @@ HERE;
           }
         
           function addItem() {
-            @$db = new mysqli(HOSTNAME, USERNAME, PASSWORD, USERNAME);
+            @$db = new mysqli($_ENV['DB_HOSTNAME'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD'], $_ENV['DB_USERNAME']);
             if (mysqli_connect_errno()) {
               echo '<h4 class="text-danger">Error: Could not connect to database.</h4>';
               exit;
