@@ -1,0 +1,10 @@
+.cart-item {
+  margin: 1rem;
+  padding: .5rem;
+  background-color: #f3f3f3;
+}
+.cart-image {
+  height: 5rem;
+  width: 7rem;
+  object-fit: cover;
+}
