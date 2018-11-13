@@ -45,11 +45,11 @@
                   <div>
                     <a href="{$_ENV['SERVER_ROOT']}/item/?id={$row['productID']}"><h5>{$row['name']}</h5></a>
                     <h6>{$row['photographer']}</h6>
-                    <small class="text-muted">Frame Type: {$cartItem['frame']}</small>
+                    <small class="text-muted">Frame: {$cartItem['frame']}</small>
                   </div>
                   <div>
                     <p><strong>\${$cartItem['price']}</strong></p>
-                    <a class="btn btn-danger" href="./?delete={$row['productID']}">Delete</a>
+                    <a class="btn btn-sm btn-danger" href="./?delete={$row['productID']}"><span class="fas fa-times"></span></a>
                   </div>
                 </div>
               </div>
