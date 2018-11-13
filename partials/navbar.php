@@ -20,8 +20,13 @@
         <li class="nav-item">
           <span class="navbar-text"><span class="fas fa-user"></span> <?php echo $_SESSION['username']; ?></span>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<?php path('/cart/'); ?>"><span title="See what's in your cart" class="fas fa-shopping-cart"></span></a>
+        <li class="nav-item d-flex align-items-center">
+          <a href="<?php path('/cart/'); ?>" class="fa-layers fa-fw nav-link">
+            <span class="fas fa-shopping-cart"></span>
+            <?php if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
+              <span class="fa-layers-counter" style="background:Tomato"></span>
+            <?php endif; ?>
+          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?php path('/favorites/'); ?>"><span title="View your favorites" class="fas fa-heart"></span></a>
