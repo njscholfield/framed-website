@@ -17,6 +17,14 @@
         </div>
       </div>
       <div class="container">
+        <?php
+          // Remove an item from the cart
+          if(isset($_GET) && !empty($_GET['delete'])) {
+            $id = $_GET['delete'];
+            unset($_SESSION['cart'][$id]);
+          }
+        ?>
+        
         <?php if(!empty($_SESSION['cart'])):
           require('../partials/database.php');
           $totalPrice = 0;
@@ -41,6 +49,7 @@
                   </div>
                   <div>
                     <p><strong>\${$cartItem['price']}</strong></p>
+                    <a class="btn btn-danger" href="./?delete={$row['productID']}">Delete</a>
                   </div>
                 </div>
               </div>
