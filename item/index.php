@@ -66,15 +66,12 @@
                   <?php
                     if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true):
                       $isFavorited = mysqli_query($connection, $isFavoritedQuery);
-                      if($isFavorited && mysqli_num_rows($isFavorited) == 0) :
+                      $faved = ($isFavorited && mysqli_num_rows($isFavorited) == 0);
                   ?>
-                      <form class="d-inline" method="post">
-                        <input type="hidden" name="action" value="AddFavorite">
-                        <button type="submit" class="btn btn-success"><span class="fas fa-heart"></span> Favorite</button>
-                      </form>
-                    <?php else: ?>
-                      <button class="btn btn-secondary disabled"><span class="fas fa-heart"></span> Favorited</button>
-                    <?php endif;
+                      <button id="fav-btn" data-item="<?php echo $itemID; ?>" class="btn btn-success <?php if(!$faved) echo "d-none"; ?>"><span class="fas fa-heart"></span> Favorite</button>
+                      <button id="unfav-btn" data-item="<?php echo $itemID; ?>" class="btn btn-secondary <?php if($faved) echo "d-none"; ?> disabled"><span class="fas fa-heart"></span> Favorited</button>
+                    <?php
+                    // SHOULD BE ABLE TO ADD MORE THAN ONE OF THE SAME ITEM TO THE CART
                     if(empty($_SESSION['cart'][$itemID])): ?>
                       <form class="d-inline" method="post">
                         <input type="hidden" name="action" value="AddToCart">
@@ -98,6 +95,6 @@
       </div>
     </div>
     <?php include('../partials/footer.php'); ?>
-    <script src="<?php path('/js/border.js'); ?>"></script>
+    <script src="<?php path('/js/item.js'); ?>"></script>
   </body>
 </html>
