@@ -21,7 +21,8 @@
           // Remove an item from the cart
           if(isset($_GET) && !empty($_GET['delete'])) {
             $id = $_GET['delete'];
-            unset($_SESSION['cart'][$id]);
+            unset($_SESSION['cart'][$id][$_GET['i']]);
+            $_SESSION['cart'][$id] = array_values($_SESSION['cart'][$id]);
           }
         ?>
         
@@ -34,28 +35,31 @@
         ?>
           <?php 
             while($row = mysqli_fetch_assoc($items)) {
-              $cartItem = $_SESSION['cart'][$row['productID']];
-              $totalPrice += $cartItem['price'];
-              echo <<<HERE
-              <div class="cart-item row align-items-center">
-                <div class="col-auto d-flex justify-content-center">
-                  <img class="cart-image" src="{$row['imageURL']}">
-                </div>
-                <div class="col d-flex justify-content-between">
-                  <div>
-                    <a href="{$_ENV['SERVER_ROOT']}/item/?id={$row['productID']}"><h5>{$row['name']}</h5></a>
-                    <h6>{$row['photographer']}</h6>
-                    <small class="text-muted">Frame: {$cartItem['frame']}</small>
+              $cartItemArr = $_SESSION['cart'][$row['productID']];
+              for($index = 0; $index < count($cartItemArr); $index++) {
+                $cartItem = $cartItemArr[$index];
+                $totalPrice += $cartItem['price'];
+                echo <<<HERE
+                <div class="cart-item row align-items-center">
+                  <div class="col-auto">
+                    <img class="cart-image" src="{$row['imageURL']}/350x250/">
                   </div>
-                  <div>
-                    <p><strong>\${$cartItem['price']}</strong></p>
-                    <a class="btn btn-sm btn-danger" href="./?delete={$row['productID']}"><span class="fas fa-times"></span></a>
+                  <div class="col d-flex justify-content-between">
+                    <div>
+                      <a href="{$_ENV['SERVER_ROOT']}/item/?id={$row['productID']}"><h5>{$row['name']}</h5></a>
+                      <h6>{$row['photographer']}</h6>
+                      <small class="text-muted">Frame: {$cartItem['frame']}</small>
+                    </div>
+                    <div>
+                      <p><strong>\${$cartItem['price']}</strong></p>
+                      <a class="btn btn-sm btn-danger" href="./?delete={$row['productID']}&i={$index}"><span class="fas fa-times"></span></a>
+                    </div>
                   </div>
                 </div>
-              </div>
 HERE;
+              }
             }
-            echo "<h4>Total: \$$totalPrice</h4>";
+            echo "<h4 class=\"text-right\">Total: \$$totalPrice</h4>";
           ?>
         <?php else: ?>
           <h4 class="text-info">You don't seem to have anything in your cart.</h4>

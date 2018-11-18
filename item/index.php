@@ -36,9 +36,9 @@
           function addItemToCart($itemID) {
             // NEED TO COME BACK AND VERIFY PRICE - CAN CURRENTLY CHANGE FORM TO MAKE ITEM $0
             if(!isset($_SESSION['cart'])) {
-              $_SESSION['cart'] = [$itemID=>["frame"=>$_POST['frame'], "price"=>$_POST['price']]];
+              $_SESSION['cart'] = [$itemID=>[["frame"=>$_POST['frame'], "price"=>$_POST['price']]]];
             } else {
-              $_SESSION['cart'][$itemID] = ["frame"=>$_POST['frame'], "price"=>$_POST['price']];
+              $_SESSION['cart'][$itemID][] = ["frame"=>$_POST['frame'], "price"=>$_POST['price']];
             }
           }
           
@@ -69,20 +69,13 @@
                       $faved = ($favResult && mysqli_num_rows($favResult) != 0) ? 'true' : 'false';
                   ?>
                       <button data-item="<?php echo $itemID; ?>" class="btn btn-success fav-btn"><span class="fas fa-heart"></span> Favorite</button>
-                    <?php
-                    // SHOULD BE ABLE TO ADD MORE THAN ONE OF THE SAME ITEM TO THE CART
-                    if(empty($_SESSION['cart'][$itemID])): ?>
                       <form class="d-inline" method="post">
                         <input type="hidden" name="action" value="AddToCart">
                         <input id="form-frame-type" type="hidden" name="frame" value="None">
                         <input id="form-price" type="hidden" name="price" value="10">
                         <button type="submit" class="btn btn-primary"><span class="fas fa-cart-plus"></span> Add to Cart</button>
                       </form>
-                    <?php else: ?>
-                      <button class="btn btn-primary disabled"><span class="fas fa-shopping-cart"></span> Added to Cart</button>
-                  <?php endif; 
-                      endif;
-                  ?>
+                  <?php endif; ?>
                 </div>
               </div>
             </div>
