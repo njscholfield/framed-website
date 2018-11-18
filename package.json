@@ -1,0 +1,15 @@
+{
+  "name": "Framed",
+  "version": "1.0.0",
+  "description": "Final project for INFSCI 1059",
+  "main": "index.php",
+  "repository": "https://github.com/njscholfield/framed-website.git",
+  "author": "Noah Scholfield <contact@noahscholfield.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  },
+  "dependencies": {}
+}
