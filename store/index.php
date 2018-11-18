@@ -64,6 +64,7 @@ HERE;
         <a class="btn btn-success" href="<?php path('/add-item/'); ?>">+ New Item</a>
       </div>
     </div>
+    <script src="<?php path('/js/favorite.js'); ?>"></script>
     <?php include('../partials/footer.php'); ?>
   </body>
 </html>

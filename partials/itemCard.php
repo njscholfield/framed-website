@@ -14,6 +14,7 @@
           </div>
           <div class="card-footer">
             <a href="{$_ENV['SERVER_ROOT']}/item/?id={$row['productID']}" class="btn btn-primary">Details</a>
+            <button data-item="{$row['productID']}" class="btn btn-success fav-btn"><span class="fas fa-heart"></span> Favorite</button>
           </div>
         </div>
       </div>

@@ -43,7 +43,6 @@
           }
           
           $itemInfoQuery = "SELECT * FROM FramedProducts WHERE productID = {$itemID}";
-          $isFavoritedQuery = "SELECT productID FROM FramedFavorites WHERE userID = {$_SESSION['userID']} AND productID = {$itemID}";
           $result = mysqli_query($connection, $itemInfoQuery);
           
           if($result && mysqli_num_rows($result) != 0):
@@ -65,11 +64,11 @@
                   <p><?php echo $row['description']; ?></p>
                   <?php
                     if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true):
-                      $isFavorited = mysqli_query($connection, $isFavoritedQuery);
-                      $faved = ($isFavorited && mysqli_num_rows($isFavorited) == 0);
+                      $isFavoritedQuery = "SELECT productID FROM FramedFavorites WHERE userID = {$_SESSION['userID']} AND productID = {$itemID}";
+                      $favResult = mysqli_query($connection, $isFavoritedQuery);
+                      $faved = ($favResult && mysqli_num_rows($favResult) != 0) ? 'true' : 'false';
                   ?>
-                      <button id="fav-btn" data-item="<?php echo $itemID; ?>" class="btn btn-success <?php if(!$faved) echo "d-none"; ?>"><span class="fas fa-heart"></span> Favorite</button>
-                      <button id="unfav-btn" data-item="<?php echo $itemID; ?>" class="btn btn-secondary <?php if($faved) echo "d-none"; ?> disabled"><span class="fas fa-heart"></span> Favorited</button>
+                      <button data-item="<?php echo $itemID; ?>" class="btn btn-success fav-btn"><span class="fas fa-heart"></span> Favorite</button>
                     <?php
                     // SHOULD BE ABLE TO ADD MORE THAN ONE OF THE SAME ITEM TO THE CART
                     if(empty($_SESSION['cart'][$itemID])): ?>
@@ -96,5 +95,6 @@
     </div>
     <?php include('../partials/footer.php'); ?>
     <script src="<?php path('/js/item.js'); ?>"></script>
+    <script src="<?php path('/js/favorite.js'); ?>"></script>
   </body>
 </html>

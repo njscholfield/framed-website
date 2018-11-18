@@ -48,6 +48,7 @@
       </div> <!-- /.row -->
     </div>
   </div>
+    <script src="<?php path('/js/favorite.js'); ?>"></script>
     <?php include('../partials/footer.php'); ?>
   </body>
 </html>

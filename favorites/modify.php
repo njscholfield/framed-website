@@ -37,6 +37,7 @@
     $query = "SELECT productID from FramedFavorites WHERE userID = {$_SESSION['userID']}";
     $result = mysqli_query($connection, $query);
     if($result && mysqli_num_rows($result) > 0) {
+      $favorites['success'] = true;
       while($row = mysqli_fetch_row($result)) {
         $favorites['favorites'][] = $row[0];
       }
