@@ -7,7 +7,9 @@
     response(false, "Not logged in");
     die();
   }
-  require('../partials/env.php');
+  if(!isset($_ENV['SERVER_ROOT'])) {
+    require('../partials/env.php');
+  }
   require('../partials/database.php');
   
   function response($success, $reason) {
@@ -34,7 +36,7 @@
   
   function getFavorites() {
     global $connection;
-    $query = "SELECT productID from FramedFavorites WHERE userID = {$_SESSION['userID']}";
+    $query = "SELECT productID FROM FramedFavorites WHERE userID = {$_SESSION['userID']}";
     $result = mysqli_query($connection, $query);
     if($result && mysqli_num_rows($result) > 0) {
       $favorites['success'] = true;
