@@ -18,22 +18,39 @@
       </div>
     </div>
     <div class="container">
-        <?php 
-          if (filter_has_var(INPUT_GET, "username")){
-            // ALSO NEED TO CHECK IF FAVORITES ARE PUBLIC AND SHOW ACCESS DENIED
-            displayResults();
+        <?php
+          require('../partials/database.php');
+          if (isset($_GET) && !empty($_GET['user'])) {
+            if((isset($_SESSION['userID']) && $_SESSION['username'] == $_GET['user']) || profileIsPublic()) {
+              displayResults();
+            } else {
+              echo '<h4 class="text-danger">Access denied! This profile does not exist or is not public.</h4>';
+            }
           } elseif(isset($_SESSION) && isset($_SESSION['username'])) {
-            $_GET['username'] = $_SESSION['username'];
+            $_GET['user'] = $_SESSION['username'];
             displayResults();
           } else {
             echo '<h4 class="text-info">Please login or specify a username to view favorites</h4>';
             die();
           }
         
+          function profileIsPublic() {
+            global $connection;
+            $publicQuery = "SELECT publicProfile FROM FramedUsers WHERE username = '{$_GET['user']}'";
+            $result = mysqli_query($connection, $publicQuery);
+            if($result && mysqli_num_rows($result) == 1) {
+              return mysqli_fetch_row($result)[0];
+            } else {
+              return false;
+            }
+          }
+        
           function displayResults() {
-            require('../partials/database.php');
-            
-            $query = "SELECT FramedProducts.productID, name, photographer, category, color, imageURL, description FROM FramedProducts JOIN FramedFavorites JOIN FramedUsers WHERE FramedProducts.productID = FramedFavorites.productID && FramedUsers.userID = FramedFavorites.userID && username = '{$_GET['username']}'";
+            global $connection;
+            $query = "SELECT FramedProducts.productID, name, photographer, category, color, imageURL, description 
+                      FROM FramedProducts JOIN FramedFavorites JOIN FramedUsers
+                      ON FramedProducts.productID = FramedFavorites.productID AND FramedUsers.userID = FramedFavorites.userID
+                      WHERE username = '{$_GET['user']}'";
             
             $results = mysqli_query($connection, $query);
             

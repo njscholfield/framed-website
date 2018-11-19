@@ -25,8 +25,8 @@ I've decided that I'll be adding to the online store that I started making for C
 #### Favoriting
 ###### by 11/16
 - [x] make the favorite button actually do something
-- [ ] ability to share a favorites page with someone
-  - [ ] adjust privacy settings?
+- [x] ability to share a favorites page with someone
+  - [x] adjust privacy settings
 - [ ] filter/search favorited items (rewrite the filter functionality I have from store page)
 - [x] remove favorited items
 

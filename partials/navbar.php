@@ -18,7 +18,7 @@
     <ul class="navbar-nav">
       <?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true): ?>
         <li class="nav-item">
-          <span class="navbar-text"><span class="fas fa-user"></span> <?php echo $_SESSION['username']; ?></span>
+          <a href="<?php path('/profile/'); ?>"><span class="navbar-text"><span class="fas fa-user"></span> <?php echo $_SESSION['username']; ?></span></a>
         </li>
         <li class="nav-item d-flex align-items-center">
           <a href="<?php path('/cart/'); ?>" class="fa-layers fa-fw nav-link">
