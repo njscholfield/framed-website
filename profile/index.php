@@ -61,8 +61,9 @@
             <button class="btn btn-primary" type="submit">Submit</button>
           </div>
         </form>
-        <?php $favURL = "{$_SERVER['SERVER_NAME']}/favorites/?user={$_SESSION['username']}"; ?>
-        <h6>If your favorites are public, people can see them at <a href="//<?php path($favURL); ?>"><?php path($favURL); ?></a></h5>
+        <?php $favURL = "/favorites/?user={$_SESSION['username']}"; ?>
+        <h6>If your favorites are public, people can see them at <a href="<?php path($favURL); ?>"><?php echo $_SERVER['SERVER_NAME'];
+         path($favURL); ?></a></h5>
         <?php else : ?>
           <h4 class="text-danger">Error loading account info</h4>
         <?php endif;
