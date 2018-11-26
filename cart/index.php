@@ -69,6 +69,7 @@ HERE;
               }
             }
             echo "<h4 class=\"text-right\">Total: \$$totalPrice</h4>";
+            echo '<a class="btn btn-success" href="'.$_ENV["SERVER_ROOT"].'/checkout/">Checkout</a>';
           } else {
             echo '<h4 class="text-info">You don\'t seem to have anything in your cart.</h4>';
           }
