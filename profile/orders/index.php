@@ -15,6 +15,7 @@
   </head>
   <body>
     <div class="f-pusher">
+      <?php require('../../partials/navbar.php'); ?>
       <div class="jumbotron">
         <div class="container">
           <h1 class="display-4">My Orders</h1>
@@ -22,7 +23,6 @@
       </div>
       <div class="container">
         <?php
-          require('../../partials/navbar.php');
           require('../../partials/database.php');
           $orderQuery = "SELECT FramedOrders.orderID, FramedProducts.productID, FramedProducts.name, frame, imageURL, shippingMethod, status, timestamp
                          FROM FramedOrders JOIN FramedOrderItems ON FramedOrders.orderID = FramedOrderItems.orderID

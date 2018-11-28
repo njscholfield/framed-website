@@ -23,7 +23,11 @@
         </div>
       </div>
       <div class="container">
-        <h1>Test</h1>
+        <h1>Actions</h1>
+        <ul>
+          <li><a href="orders/">View All Orders</a></li>
+          <li><a href="items/">Edit Item Details</a></li>
+        </ul>
       </div>
     </div>
     <?php include('../partials/footer.php'); ?>
