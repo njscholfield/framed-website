@@ -45,8 +45,8 @@ I've decided that I'll be adding to the online store that I started making for C
 - [x] store current cart contents (in $\_SESSION?)
 - [ ] fix price so you can't change it by changing the form
 - [x] add/remove items in the cart
-- [ ] checkout
-- [ ] order history
+- [x] checkout
+- [x] order history
 
 #### Admin Panel
 ###### by 12/5
