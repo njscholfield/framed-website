@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php
+  session_start();
+  // If user is already logged in, redirect to home
+  if(isset($_SESSION['userID'])) {
+    header("Location: ../");
+    die();
+  }
+?>
 <!DOCTYPE html>
 <html>
   <head>
