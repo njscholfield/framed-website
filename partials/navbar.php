@@ -18,7 +18,15 @@
     <ul class="navbar-nav">
       <?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true): ?>
         <li class="nav-item">
-          <a href="<?php path('/profile/'); ?>"><span class="navbar-text"><span class="fas fa-user"></span> <?php echo $_SESSION['username']; ?></span></a>
+          <div class="dropdown">
+            <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-user"></span></a>
+            <div class="dropdown-menu dropdown-menu-right" role="menu">
+              <a class="dropdown-item" href="<?php path('/profile/'); ?>"><span class="fas fa-cog"></span> Settings</a>
+              <a class="dropdown-item" href="<?php path('/profile/orders/'); ?>">My Orders</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/logout/">Sign Out</a>
+            </div>
+          </div>
         </li>
         <li class="nav-item d-flex align-items-center">
           <a href="<?php path('/cart/'); ?>" class="fa-layers fa-fw nav-link">

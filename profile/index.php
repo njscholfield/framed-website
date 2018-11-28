@@ -72,5 +72,6 @@
         ?>
       <a class="btn btn-danger" href="<?php path('/logout/'); ?>">Log Out</a>
     </div>
+    <?php include('../partials/footer.php'); ?>
   </body>
 </html>
