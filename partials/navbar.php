@@ -21,13 +21,13 @@
           <div class="dropdown">
             <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-user"></span> <?php echo $_SESSION['username']; ?></a>
             <div class="dropdown-menu dropdown-menu-right" role="menu">
-              <?php if($_SESSION['role'] == "Admin") {
-                echo '<a class="dropdown-item" href="'.$_ENV['SERVER_ROOT'].'/admin/"><span class="fas fa-toolbox"></span> Admin</a>';
-              } ?>
+              <?php if($_SESSION['role'] == "Admin"): ?>
+                <a class="dropdown-item" href="<?php path('/admin/'); ?>"><span class="fas fa-toolbox"></span> Admin</a>
+              <?php endif; ?>
               <a class="dropdown-item" href="<?php path('/profile/'); ?>"><span class="fas fa-cog"></span> Settings</a>
               <a class="dropdown-item" href="<?php path('/profile/orders/'); ?>"><span class="fas fa-shopping-bag"></span> My Orders</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/logout/"><span class="fas fa-sign-out-alt"></span> Sign Out</a>
+              <a class="dropdown-item" href="<?php path('/logout/'); ?>"><span class="fas fa-sign-out-alt"></span> Sign Out</a>
             </div>
           </div>
         </li>
