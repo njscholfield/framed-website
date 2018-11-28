@@ -37,7 +37,7 @@
           }
         }
         
-        $accountQuery = "SELECT userID, firstName, lastName, username, email, publicProfile
+        $accountQuery = "SELECT userID, firstName, lastName, username, email, publicProfile, role
                          FROM FramedUsers
                          WHERE userID = {$_SESSION['userID']}";
         $userData = mysqli_query($connection, $accountQuery);

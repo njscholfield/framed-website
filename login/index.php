@@ -29,7 +29,7 @@
 
           // Query database and check username and password
           $sanitizedUsername = mysqli_escape_string($connection, $_POST['username']);
-          $query = "SELECT userID, username, password FROM FramedUsers WHERE username = '{$sanitizedUsername}';";
+          $query = "SELECT userID, username, password, role FROM FramedUsers WHERE username = '{$sanitizedUsername}';";
           $result = mysqli_query($connection, $query);
           
           if(!$result || mysqli_num_rows($result) == 0) {
@@ -45,6 +45,7 @@
             $_SESSION['loggedIn'] = true;
             $_SESSION['username'] = $user['username'];
             $_SESSION['userID'] = $user['userID'];
+            $_SESSION['role'] = $user['role'];
             mysqli_free_result($result);
             mysqli_close($connection);
             echo '<meta http-equiv="refresh" content="0;URL=../">'; // redirect to profile page

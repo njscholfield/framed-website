@@ -19,25 +19,28 @@
       <?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true): ?>
         <li class="nav-item">
           <div class="dropdown">
-            <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-user"></span></a>
+            <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-user"></span> <?php echo $_SESSION['username']; ?></a>
             <div class="dropdown-menu dropdown-menu-right" role="menu">
+              <?php if($_SESSION['role'] == "Admin") {
+                echo '<a class="dropdown-item" href="'.$_ENV['SERVER_ROOT'].'/admin/"><span class="fas fa-toolbox"></span> Admin</a>';
+              } ?>
               <a class="dropdown-item" href="<?php path('/profile/'); ?>"><span class="fas fa-cog"></span> Settings</a>
-              <a class="dropdown-item" href="<?php path('/profile/orders/'); ?>">My Orders</a>
+              <a class="dropdown-item" href="<?php path('/profile/orders/'); ?>"><span class="fas fa-shopping-bag"></span> My Orders</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/logout/">Sign Out</a>
+              <a class="dropdown-item" href="/logout/"><span class="fas fa-sign-out-alt"></span> Sign Out</a>
             </div>
           </div>
         </li>
         <li class="nav-item d-flex align-items-center">
           <a href="<?php path('/cart/'); ?>" class="fa-layers fa-fw nav-link">
-            <span class="fas fa-shopping-cart"></span>
+            <span class="fas fa-shopping-cart" title="View your cart"></span><noscript>Cart</noscript>
             <?php if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
               <span class="fa-layers-counter" style="background:Tomato"></span>
             <?php endif; ?>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?php path('/favorites/'); ?>"><span title="View your favorites" class="fas fa-heart"></span></a>
+          <a class="nav-link" href="<?php path('/favorites/'); ?>"><span title="View your favorites" class="fas fa-heart"></span><noscript>Favorites</noscript></a>
         </li>
         
       <?php else: ?>
