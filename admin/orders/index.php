@@ -13,10 +13,14 @@
       define("PAGE_TITLE", "All Orders");
       require('../../partials/head.php');
     ?>
+    <link rel="stylesheet" href="<?php path('/css/admin.css'); ?>">
   </head>
   <body>
     <div class="f-pusher">
-      <?php include('../../partials/navbar.php'); ?>
+      <?php
+        include('../../partials/navbar.php');
+        include('../../partials/adminSidebar.php');
+      ?>
       <div class="jumbotron">
         <div class="container">
           <h1 class="display-4">All Orders</h1>

@@ -6,7 +6,7 @@ This a website for my final project in both CS 334 (Intermediate Web Design and 
 - [Google Fonts](https://fonts.google.com)
   - [Raleway](https://fonts.google.com/specimen/Raleway) (body font)
   - [Montserrat](https://fonts.google.com/specimen/Montserrat) (heading font)
-  
+
 ---
 
 **I am currently adding on to this project as the final project for my web programming class (INFSCI 1059) at Pitt. Here is my progress so far:**
@@ -50,11 +50,16 @@ I've decided that I'll be adding to the online store that I started making for C
 
 #### Admin Panel
 ###### by 12/5
-- [ ] view all orders
+- [x] view all orders
   - [ ] search/filter functionality
   - [ ] reporting? (popularity of specific item)
 - [ ] track inventory
 - [ ] add/delete/update items and info
+  - [ ] add
+  - [ ] delete
+  - [ ] update
+    - [ ] NEED TO ADD VALIDATION FOR INPUT (FOR ADD AND UPDATE) - AJAX?
+- [x] sidebar to make getting to different pages easier
 - [ ] if I have extra time I kind of want to explore barcode scanning for fun but we'll see...
 
 #### Cleanup
@@ -63,3 +68,4 @@ I've decided that I'll be adding to the online store that I started making for C
 - [ ] make it look prettier
 - [ ] figure out what parts I want to make sure I present
 - [ ] add any random things I think of if I have extra time...
+- [ ] complete write and explanation

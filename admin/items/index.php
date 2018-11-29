@@ -13,6 +13,7 @@
       define("PAGE_TITLE", "Items");
       require('../../partials/head.php');
     ?>
+    <link rel="stylesheet" href="<?php path('/css/admin.css'); ?>">
   </head>
   <body>
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -61,13 +62,17 @@
       </div>
     </div>
     <div class="f-pusher">
-      <?php include('../../partials/navbar.php'); ?>
+      <?php
+        include('../../partials/navbar.php');
+        include('../../partials/adminSidebar.php');
+      ?>
       <div class="jumbotron">
         <div class="container">
           <h1 class="display-4">Items</h1>
         </div>
       </div>
       <div class="container">
+        <h4 class="text-danger">Need to validate input for edited info</h4>
         <?php
           require('../../partials/database.php');
 
