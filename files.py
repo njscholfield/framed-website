@@ -35,8 +35,9 @@ for subdir, dirs, files in os.walk(rootdir):
         dirs.remove('vendor')
 
     for file in files:
-        # Skip dotfiles, env.php, text.html, README.md and images
-        if(file[:1] == '.' or file == 'env.php' or file == 'text.html' or file == 'README.md' or file.find('.ico') != -1 or file.find('.png') != -1 or file.find('.jpg') != -1):
+        # Skip dotfiles, images, and other unneeded files
+        filesToSkip = ['env.php', 'text.html', 'README.md', 'package.json', 'composer.json', 'composer.lock']
+        if(file[:1] == '.' or (file in filesToSkip) or file.find('.ico') != -1 or file.find('.png') != -1 or file.find('.jpg') != -1):
             continue
         filePath = os.path.join(subdir, file)
         newDirectory = txtDirectory(filePath)
