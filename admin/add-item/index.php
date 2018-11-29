@@ -2,28 +2,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <?php 
+    <?php
       DEFINE("PAGE_TITLE", "Add Item");
-      require('../partials/head.php');
+      require('../../partials/head.php');
     ?>
     <link rel="stylesheet" href="<?php path('/css/item.css'); ?>">
+    <link rel="stylesheet" href="<?php path('/css/admin.css'); ?>">
   </head>
   <body>
     <div class="f-pusher">
-      <?php include('../partials/navbar.php'); ?>
+      <?php
+        include('../../partials/navbar.php');
+        include('../../partials/adminSidebar.php');
+      ?>
       <div class="jumbotron">
         <div class="container">
           <h1 class="display-4">Add New Item</h1>
         </div>
       </div>
       <div class="container">
-        <?php 
-          if (filter_has_var(INPUT_POST, "name")){
+        <h4 class="text-danger">Need to validate input</h4>
+        <?php
+          if (isset($_POST) && isset($_POST['name'])){
             addItem();
           } else {
             displayForm();
           }
-          
+
           function displayForm() {
             print <<<HERE
               <form action="" method="POST">
@@ -59,29 +64,35 @@
               </form>
 HERE;
           }
-        
-          function addItem() {
-            @$db = new mysqli($_ENV['DB_HOSTNAME'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD'], $_ENV['DB_USERNAME']);
-            if (mysqli_connect_errno()) {
-              echo '<h4 class="text-danger">Error: Could not connect to database.</h4>';
-              exit;
+
+          function sanitizeInput($connection) {
+            $clean = array();
+
+            foreach ($_POST as $key => $value) {
+              $clean[$key] = htmlspecialchars(mysqli_escape_string($connection, $value));
             }
-            
-            $query = "INSERT INTO FramedProducts VALUES(NULL, ?, ?, ?, ?, ?, ?)";
-            $stmt = $db->prepare($query);
-            $stmt->bind_param('ssssss', $_POST['name'], $_POST['photographer'], $_POST['category'], $_POST['color'], $_POST['imageURL'], $_POST['description']);
-            $stmt->execute();
-            
-            if ($stmt->affected_rows > 0) {
-              echo  '<h4 class="text-success">Item successfully added!</h4>';
+            return $clean;
+          }
+
+          function addItem() {
+            require('../../partials/database.php');
+
+            $clean = sanitizeInput($connection);
+
+            $newItemQuery = "INSERT INTO FramedProducts (name, photographer, category, color, imageURL, description)
+                             VALUES ('{$clean['name']}', '{$clean['photographer']}', '{$clean['category']}', '{$clean['imageURL']}', '{$clean['description']}')";
+            $successful = mysqli_query($connection, $newItemQuery);
+
+            if ($successful) {
+              echo '<h4 class="text-success">Item successfully added!</h4>';
             } else {
               echo '<h4 class="text-danger">Error adding the item. Please try again!</h4>';
             }
-            $db->close();
+            mysqli_close($connection);
           }
         ?>
       </div>
     </div>
-    <?php include('../partials/footer.php'); ?>
+    <?php include('../../partials/footer.php'); ?>
   </body>
 </html>
