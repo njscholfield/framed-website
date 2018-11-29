@@ -13,7 +13,7 @@ txtFiles = []
 def txtDirectory(filePath):
     return filePath[:dirLen] + '/txt/' + filePath[(dirLen + 1):] + '.txt'
 
-# Builds and writes the HTML file with links to all the txt files    
+# Builds and writes the HTML file with links to all the txt files
 def createTxtHTMLFile():
     output = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Text Files</title><style>body {font-family: sans-serif;}</style></head><body><h1>Text Files</h1><ul>'
     for file in txtFiles:
@@ -30,6 +30,9 @@ for subdir, dirs, files in os.walk(rootdir):
     # Ignore .git files
     if '.git' in dirs:
         dirs.remove('.git')
+    # Ignore vendor files
+    if 'vendor' in dirs:
+        dirs.remove('vendor')
 
     for file in files:
         # Skip dotfiles, env.php, text.html, README.md and images
@@ -41,11 +44,8 @@ for subdir, dirs, files in os.walk(rootdir):
         run(copy, shell=True)
 
         txtFiles.append(newDirectory[(dirLen + 1):])
-        
+
         print('\u001b[37;1m' + filePath[dirLen:] + ' copied to ' + newDirectory + '\033[0m')
 
 print('\033[92m' + str(len(txtFiles)) + ' files copied to txt files' + '\033[0m')
 createTxtHTMLFile()
-
-
-

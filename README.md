@@ -68,4 +68,4 @@ I've decided that I'll be adding to the online store that I started making for C
 - [ ] make it look prettier
 - [ ] figure out what parts I want to make sure I present
 - [ ] add any random things I think of if I have extra time...
-- [ ] complete write and explanation
+- [ ] complete write up and explanation
