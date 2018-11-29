@@ -1,4 +1,4 @@
-<?php 
+<?php
   session_start();
   // User must be logged in and an Admin to view this page
   if(!isset($_SESSION['userID']) || !isset($_SESSION['role']) || $_SESSION['role'] != 'Admin') {
@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <?php 
+    <?php
       define("PAGE_TITLE", "All Orders");
       require('../../partials/head.php');
     ?>
@@ -25,7 +25,7 @@
       <div class="container">
         <h4 class="text-danger">Need to add person who ordered each item, another join...</h4>
         <h4 class="text-warning">Filter orders by user, item(reports?), status, date</h4>
-        <?php 
+        <?php
           require('../../partials/database.php');
           $orderQuery = "SELECT FramedOrders.orderID, FramedProducts.productID, FramedProducts.name, frame, imageURL, shippingMethod, status, timestamp
                          FROM FramedOrders JOIN FramedOrderItems ON FramedOrders.orderID = FramedOrderItems.orderID
@@ -54,7 +54,9 @@ HERE;
              $last = $row['orderID'];
            }
            echo "</table>";
+           mysqli_free_result($orders);
          }
+         mysqli_close($connection);
        ?>
      </div>
     </div>

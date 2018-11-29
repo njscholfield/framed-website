@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <?php 
+    <?php
       DEFINE("PAGE_TITLE", "Store");
       require('../partials/head.php');
       require('../partials/itemCard.php');
@@ -23,28 +23,30 @@
             $query = "SELECT * FROM FramedProducts";
             $colorsQ = "SELECT DISTINCT color FROM FramedProducts";
             $categoriesQ = "SELECT DISTINCT category FROM FramedProducts";
-            
+
             if(isset($_GET['category'])) {
               $query .= " WHERE category='{$_GET['category']}'";
             } else if(isset($_GET['color'])) {
               $query .= " WHERE color='{$_GET['color']}'";
             }
             $results = mysqli_query($connection, $query);
-            
+
             if($results) {
               $colors = mysqli_query($connection, $colorsQ);
               $categories = mysqli_query($connection, $categoriesQ);
-    
+
               // filter results
               print_filter_box($colors, $categories);
-              
+
               printItemCards($results);
-              
+              mysqli_free_result($results);
+              mysqli_free_result($colors);
+              mysqli_free_result($categories);
             } else {
               echo '<h4 class="text-primary">No products to show</h4>';
             }
             mysqli_close($connection);
-            
+
             function print_filter_box($colors, $categories) {
               print <<<HERE
               <button class="btn btn-link" onclick="$('#filter-options').toggleClass('d-none')">Filter <span class="fas fa-chevron-down"></span></button>
@@ -61,7 +63,6 @@ HERE;
             }
           ?>
         </div> <!-- /.row -->
-        <a class="btn btn-success" href="<?php path('/add-item/'); ?>">+ New Item</a>
       </div>
     </div>
     <script src="<?php path('/js/favorite.js'); ?>"></script>

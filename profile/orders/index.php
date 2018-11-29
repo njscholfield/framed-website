@@ -52,7 +52,9 @@ HERE;
               $last = $row['orderID'];
             }
             echo "</table>";
+            mysqli_free_result($orders);
           }
+          mysqli_close($connection);
         ?>
       </div>
     </div>

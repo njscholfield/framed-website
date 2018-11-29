@@ -30,17 +30,17 @@
               $_SESSION['cart'][$id] = array_values($_SESSION['cart'][$id]);
             }
           }
-          
+
           if(!empty($_SESSION['cart'])) {
             require('../partials/database.php');
             $totalPrice = 0;
-            $ids = join(", ", array_keys($_SESSION['cart'])); // lookup the product info for only the items in the cart 
+            $ids = join(", ", array_keys($_SESSION['cart'])); // lookup the product info for only the items in the cart
             $itemsQuery = "SELECT productID, name, photographer, imageURL FROM FramedProducts WHERE productID IN ($ids);";
             $items = mysqli_query($connection, $itemsQuery);
-  
+
             while($row = mysqli_fetch_assoc($items)) {
               $cartItemArr = $_SESSION['cart'][$row['productID']];
-              
+
               for($index = 0; $index < count($cartItemArr); $index++) {
                 $cartItem = $cartItemArr[$index];
                 $totalPrice += $cartItem['price'];
@@ -57,7 +57,7 @@
                     </div>
                     <div>
                       <p><strong>\${$cartItem['price']}</strong></p>
-                      <form action="" method="post"> 
+                      <form action="" method="post">
                         <input type="hidden" name="id" value="{$row['productID']}">
                         <input type="hidden" name="index" value="{$index}">
                         <button class="btn btn-sm btn-danger" type="submit"><span class="fas fa-times"></span></button>
@@ -70,6 +70,8 @@ HERE;
             }
             echo "<h4 class=\"text-right\">Total: \$$totalPrice</h4>";
             echo '<a class="btn btn-success" href="'.$_ENV["SERVER_ROOT"].'/checkout/">Checkout</a>';
+            mysqli_free_result($items);
+            mysqli_close($connection);
           } else {
             echo '<h4 class="text-info">You don\'t seem to have anything in your cart.</h4>';
           }

@@ -1,4 +1,4 @@
-<?php 
+<?php
   session_start();
   // User must be logged in and an Admin to view this page
   if(!isset($_SESSION['userID']) || !isset($_SESSION['role']) || $_SESSION['role'] != 'Admin') {
@@ -68,18 +68,18 @@
         </div>
       </div>
       <div class="container">
-        <?php 
+        <?php
           require('../../partials/database.php');
-          
+
           function sanitizeInput($connection) {
             $clean = array();
-            
+
             foreach ($_POST as $key => $value) {
               $clean[$key] = htmlspecialchars(mysqli_escape_string($connection, $value));
             }
             return $clean;
           }
-          
+
           if(isset($_POST) && isset($_POST['productID'])) {
             $clean = sanitizeInput($connection);
             $updateQuery = "UPDATE FramedProducts
@@ -91,11 +91,11 @@
             } else {
               echo '<h4 class="text-danger">Error updating item</h4>';
             }
-          } 
-        
+          }
+
           $allItemsQuery = "SELECT * FROM FramedProducts;";
           $allItems = mysqli_query($connection, $allItemsQuery);
-          
+
           echo '<table class="table"><tr><th>Name</th><th>Photographer</th><th>Description</th><th>Edit</th></tr>';
           while($row = mysqli_fetch_assoc($allItems)) {
             echo <<<HERE
@@ -108,6 +108,8 @@
 HERE;
           }
           echo "</table>";
+          mysqli_free_result($allItems);
+          mysqli_close($connection);
        ?>
       </div>
     </div>
