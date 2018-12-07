@@ -26,7 +26,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form method="post" action="">
+            <form method="post" action="" id="editform">
               <input type="hidden" name="productID" value="" id="product-id">
               <div class="form-group">
                 <label class="col-form-label">Item Name</label>
@@ -38,7 +38,7 @@
               </div>
               <div class="form-group">
                 <label class="col-form-label">Image URL</label>
-                <input type="url" class="form-control" name="imageURL">
+                <input type="url" class="form-control" name="imageURL" placeholder="https://source.unsplash.com/...">
               </div>
               <div class="form-group">
                 <label class="col-form-label">Category</label>
@@ -73,6 +73,7 @@
       </div>
       <div class="container">
         <h4 class="text-danger">Need to validate input for edited info</h4>
+        <button class="btn btn-success float-right" data-toggle="modal" data-target="#editModal" data-id="-1"><span class="fas fa-plus"></span> New</button>
         <?php
           require('../../partials/database.php');
 
@@ -87,9 +88,16 @@
 
           if(isset($_POST) && isset($_POST['productID'])) {
             $clean = sanitizeInput($connection);
-            $updateQuery = "UPDATE FramedProducts
-                            SET name = '{$clean['name']}', photographer = '{$clean['photographer']}', imageURL = '{$clean['imageURL']}', category = '{$clean['category']}', color = '{$clean['color']}', description = '{$clean['description']}'
-                            WHERE ProductID = {$_POST['productID']};";
+            // If adding a new item I set the productID field to -1
+            if($_POST['productID'] == -1) {
+              $updateQuery = "INSERT INTO FramedProducts
+                              (name, photographer, category, color, imageURL, description)
+                              VALUES ('{$clean['name']}', '{$clean['photographer']}', '{$clean['category']}', '{$clean['color']}', '{$clean['imageURL']}', '{$clean['description']}');";
+            } else {
+              $updateQuery = "UPDATE FramedProducts
+                              SET name = '{$clean['name']}', photographer = '{$clean['photographer']}', imageURL = '{$clean['imageURL']}', category = '{$clean['category']}', color = '{$clean['color']}', description = '{$clean['description']}'
+                              WHERE ProductID = {$_POST['productID']};";
+            }
             $result = mysqli_query($connection, $updateQuery);
             if($result) {
               echo '<h4 class="text-success">Item updated!</h4>';
@@ -108,7 +116,7 @@
               <td><a href="{$_ENV['SERVER_ROOT']}/item/?id={$row['productID']}">{$row['name']}</a></td>
               <td>{$row['photographer']}</td>
               <td>{$row['description']}</td>
-              <td><a data-toggle="modal" data-target="#editModal" data-id="{$row['productID']}"><span class="fas fa-edit"></span></a></td>
+              <td class="text-center"><a class="text-primary" data-toggle="modal" data-target="#editModal" data-id="{$row['productID']}"><span class="fas fa-edit"></span></a></td>
             </tr>
 HERE;
           }
@@ -119,25 +127,6 @@ HERE;
       </div>
     </div>
     <?php include('../../partials/footer.php'); ?>
-    <script>
-      // Code adapted from Bootstrap Documentation http://getbootstrap.com/docs/4.1/components/modal/#modal
-      $('#editModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var id = button.data('id');
-        var modal = $(this)
-        let itemData = "";
-        fetch(`../../item/info.php/?id=${id}`)
-          .then(blob => blob.json())
-          .then(data => {
-            modal.find('.modal-body #product-id').val(id)
-            modal.find("input[name*='name']").val(data.name);
-            modal.find("input[name*='photographer']").val(data.photographer);
-            modal.find("input[name*='imageURL']").val(data.imageURL);
-            modal.find("input[name*='category']").val(data.category);
-            modal.find("input[name*='color']").val(data.color);
-            modal.find("textarea[name*='description']").html(data.description);
-          });
-      });
-    </script>
+    <script src="<?php path('/js/admin.js'); ?>"></script>
   </body>
 </html>
