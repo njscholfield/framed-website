@@ -27,30 +27,30 @@
           </div>
           <div class="modal-body">
             <form method="post" action="" id="editform">
-              <input type="hidden" name="productID" value="" id="product-id">
+              <input type="hidden" name="productID" value="" id="productid">
               <div class="form-group">
                 <label class="col-form-label">Item Name</label>
-                <input type="text" class="form-control" name="name">
+                <input type="text" class="form-control" name="name" id="name">
               </div>
               <div class="form-group">
                 <label class="col-form-label">Photographer</label>
-                <input type="text" class="form-control" name="photographer">
+                <input type="text" class="form-control" name="photographer" id="photographer">
               </div>
               <div class="form-group">
                 <label class="col-form-label">Image URL</label>
-                <input type="url" class="form-control" name="imageURL" placeholder="https://source.unsplash.com/...">
+                <input type="url" class="form-control" name="imageURL" placeholder="https://source.unsplash.com/..." id="imageURL">
               </div>
               <div class="form-group">
                 <label class="col-form-label">Category</label>
-                <input type="text" class="form-control" name="category">
+                <input type="text" class="form-control" name="category" id="category">
               </div>
               <div class="form-group">
                 <label class="col-form-label">Color</label>
-                <input type="text" class="form-control" name="color">
+                <input type="text" class="form-control" name="color" id="color">
               </div>
               <div class="form-group">
                 <label class="col-form-label">Description</label>
-                <textarea type="text" class="form-control" name="description"></textarea>
+                <textarea type="text" class="form-control" name="description" id="description"></textarea>
               </div>
             </div>
             <div class="modal-footer">

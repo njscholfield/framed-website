@@ -1,22 +1,38 @@
 // Code adapted from Bootstrap Documentation http://getbootstrap.com/docs/4.1/components/modal/#modal
 /* global $ */
-$('#editModal').on('show.bs.modal', function updateFields(event) {
-  const button = $(event.relatedTarget); // Button that triggered the modal
-  const id = button.data('id');
-  const modal = $(this);
-  modal.find("input[name*='productID']").val(id);
-  if (id === -1) {
-    $('#editform')[0].reset();
+const editModal = document.getElementById('editModal');
+const editForm = document.getElementById('editform');
+const productID = document.getElementById('productid');
+const itemName = document.getElementById('name');
+const photographer = document.getElementById('photographer');
+const imageURL = document.getElementById('imageURL');
+const category = document.getElementById('category');
+const color = document.getElementById('color');
+const description = document.getElementById('description');
+
+function updateFields(e) {
+  const button = $(e.relatedTarget)[0];
+//   const button = e.target;
+  const id = button.dataset.id;
+  console.log(id);
+  
+  productID.value = id;
+  if (id == -1) {
+    editForm.reset();
     return;
   }
+  
   fetch(`../../item/info.php/?id=${id}`)
     .then(blob => blob.json())
     .then((data) => {
-      modal.find("input[name*='name']").val(data.name);
-      modal.find("input[name*='photographer']").val(data.photographer);
-      modal.find("input[name*='imageURL']").val(data.imageURL);
-      modal.find("input[name*='category']").val(data.category);
-      modal.find("input[name*='color']").val(data.color);
-      modal.find("textarea[name*='description']").val(data.description);
+      itemName.value = data.name;
+      photographer.value = data.photographer;
+      imageURL.value = data.imageURL;
+      category.value = data.category;
+      color.value = data.color;
+      description.value = data.description;
     });
-});
+}
+
+// editModal.addEventListener('show.bs.modal', updateFields, false);
+$('#editModal').on('show.bs.modal', updateFields);
