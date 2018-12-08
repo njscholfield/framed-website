@@ -1,4 +1,4 @@
-<footer>
+<footer class="footer">
   <div class="row">
     <p class="col">Images from <a href="https://unsplash.com/collections/1953059/framed" target="_blank" rel="noopener noreferrer">Unsplash</a></p>
     <h6 class="col">Designed and built by <a href="https://noahscholfield.com/" target="_blank">Noah Scholfield</a></h6>

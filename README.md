@@ -55,12 +55,12 @@ I've decided that I'll be adding to the online store that I started making for C
   - [ ] reporting? (popularity of specific item)
 - [ ] track inventory
 - [ ] add/delete/update items and info
-  - [ ] add
+  - [x] add
   - [ ] delete
-  - [ ] update
-    - [ ] NEED TO ADD VALIDATION FOR INPUT (FOR ADD AND UPDATE) - AJAX?
+  - [x] update
+    - [x] add validation
 - [x] sidebar to make getting to different pages easier
-- [ ] if I have extra time I kind of want to explore barcode scanning for fun but we'll see...
+- [ ] ~~if I have extra time I kind of want to explore barcode scanning for fun but we'll see...~~
 
 #### Cleanup
 ###### by 12/11

@@ -1,38 +1,37 @@
 // Code adapted from Bootstrap Documentation http://getbootstrap.com/docs/4.1/components/modal/#modal
-/* global $ */
-const editModal = document.getElementById('editModal');
-const editForm = document.getElementById('editform');
-const productID = document.getElementById('productid');
-const itemName = document.getElementById('name');
-const photographer = document.getElementById('photographer');
-const imageURL = document.getElementById('imageURL');
-const category = document.getElementById('category');
-const color = document.getElementById('color');
-const description = document.getElementById('description');
-
-function updateFields(e) {
-  const button = $(e.relatedTarget)[0];
-//   const button = e.target;
-  const id = button.dataset.id;
-  console.log(id);
-  
-  productID.value = id;
-  if (id == -1) {
-    editForm.reset();
-    return;
-  }
-  
-  fetch(`../../item/info.php/?id=${id}`)
-    .then(blob => blob.json())
-    .then((data) => {
-      itemName.value = data.name;
-      photographer.value = data.photographer;
-      imageURL.value = data.imageURL;
-      category.value = data.category;
-      color.value = data.color;
-      description.value = data.description;
-    });
-}
-
-// editModal.addEventListener('show.bs.modal', updateFields, false);
-$('#editModal').on('show.bs.modal', updateFields);
+/* global Vue, axios */
+const admin = new Vue({
+  el: '#vue',
+  data: {
+    formData: {},
+    errors: {},
+    pageMessage: {},
+  },
+  methods: {
+    openEditModal(id) {
+      if (id === -1) {
+        this.formData = { productID: -1 };
+        this.$refs.editModal.show();
+        return;
+      }
+      axios.get(`../../item/info.php/?id=${id}`)
+        .then(response => this.formData = response.data)
+        .then(() => this.$refs.editModal.show())
+        .catch(err => console.error(err));
+    },
+    submitForm() {
+      axios.post('update.php', this.formData)
+        .then(response => response.data)
+        .then((status) => {
+          if (status.successful) {
+            this.pageMessage = { type: 'text-success', message: 'Item updated!' };
+            this.errors = {};
+            this.$refs.editModal.hide();
+          } else {
+            this.errors = status.errors;
+          }
+        })
+        .catch(error => this.pageMessage = { type: 'text-danger', message: 'Error updating item' });
+    },
+  },
+});
