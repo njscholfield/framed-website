@@ -39,10 +39,10 @@
               <?php if($_SESSION['role'] == "Admin"): ?>
                 <b-dropdown-item class="bg-transparent" href="<?php path('/admin/'); ?>"><span class="fas fa-toolbox"></span> Admin</b-dropdown-item>
               <?php endif; ?>
-              <b-dropdown-item href="<?php path('/profile/'); ?>"><span class="fas fa-cog"></span> Settings</b-dropdown-item>
-              <b-dropdown-item href="<?php path('/profile/orders/'); ?>"><span class="fas fa-shopping-bag"></span> My Orders</b-dropdown-item>
+              <b-dropdown-item class="bg-transparent" href="<?php path('/profile/'); ?>"><span class="fas fa-cog"></span> Settings</b-dropdown-item>
+              <b-dropdown-item class="bg-transparent" href="<?php path('/profile/orders/'); ?>"><span class="fas fa-shopping-bag"></span> My Orders</b-dropdown-item>
               <div class="dropdown-divider"></div>
-              <b-dropdown-item href="<?php path('/logout/'); ?>"><span class="fas fa-sign-out-alt"></span> Sign Out</b-dropdown-item>
+              <b-dropdown-item class="bg-transparent" href="<?php path('/logout/'); ?>"><span class="fas fa-sign-out-alt"></span> Sign Out</b-dropdown-item>
             </b-nav-item-dropdown>
           </li>
           <li class="nav-item d-flex align-items-center">

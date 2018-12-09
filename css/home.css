@@ -14,6 +14,7 @@ body {
 }
 .dropdown-menu {
   background-color: rgba(10,10,10,.8) !important;
+
 }
 .full-image {
   width: 100%;
@@ -33,4 +34,10 @@ body {
   text-shadow: 2px 2px black;
   padding-top: 3.5rem;
   font-weight: 900;
+}
+
+@media(max-width: 576px) {
+  .dropdown-menu {
+    background-color: transparent !important;
+  }
 }
