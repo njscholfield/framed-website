@@ -25,17 +25,17 @@
       <?php
         function sanitizeInput($connection) {
           $clean = array();
-          
+
           foreach ($_POST as $key => $value) {
             $clean[$key] = htmlspecialchars(mysqli_escape_string($connection, $value));
           }
           $clean['hPassword'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
-          
+
           return $clean;
         }
         function checkForErrors() {
           $errors = array();
-          
+
           if(empty($_POST['fname']) || strlen($_POST['fname']) > 20 || !preg_match("/^[a-zA-Z'\s-]*$/", $_POST['fname'])) {
             $errors['fname'] = "Hmm, is that your name? Please only use letters dashes, spaces, and apostrophes";
           }
@@ -51,10 +51,10 @@
           if(empty($_POST['password']) || strlen($_POST['password']) < 8) {
             $errors['password'] = "Make sure your password is at least 8 characters long";
           }
-          
+
           return $errors;
         }
-      
+
         if(!empty($_POST)) {
           require('../partials/database.php');
 
@@ -75,11 +75,11 @@
               $_SESSION['username'] = $clean['username'];
               $_SESSION['userID'] = mysqli_insert_id($connection);
               mysqli_close($connection);
-              echo '<meta http-equiv="refresh" content="0;URL=../">'; // redirect to home page 
+              echo '<meta http-equiv="refresh" content="0;URL=../">'; // redirect to home page
               die();
             }
           }
-        }  
+        }
       ?>
       <form action="" method="post">
         <div class="form-group">
@@ -112,5 +112,6 @@
         </div>
       </form>
     </div>
+    <?php include('../partials/footer.php'); ?>
   </body>
 </html>
