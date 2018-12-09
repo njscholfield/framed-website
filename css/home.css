@@ -12,6 +12,9 @@ body {
 .bg-dark {
   background-color: rgba(10,10,10,.8) !important;
 }
+.dropdown-menu {
+  background-color: rgba(10,10,10,.8) !important;
+}
 .full-image {
   width: 100%;
   height: 100vh;

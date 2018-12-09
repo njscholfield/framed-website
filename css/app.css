@@ -41,6 +41,18 @@ h1, h2, h3 {
   font-weight: bold;
 }
 
+/* navbar transitions */
+.expand-enter-active, .expand-leave-active {
+  transition: height .5s;
+  overflow-y: hidden;
+}
+.expand-enter-active, .expand-leave-active {
+  height: 195px;
+}
+.expand-enter, .expand-leave-to {
+  height: 0;
+}
+
 @media (max-width: 576px) {
   .jumbotron {
     padding: 4rem 0rem;
@@ -50,5 +62,8 @@ h1, h2, h3 {
   }
   .f-pusher {
     min-height: calc(100vh - 7.7rem);
+  }
+  .dropdown-item {
+    padding: .5rem;
   }
 }
