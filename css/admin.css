@@ -44,6 +44,31 @@
 .container {
   margin-right: 3.5rem;
 }
+img#preview {
+  height: 100%;
+  width: 100%;
+}
+.message {
+  background-color: white;
+  border-radius: 3rem;
+  position: fixed;
+  bottom: .8rem;
+  padding: 1rem 2rem;
+  border: 1px solid #eaeaea;
+}
+.message h6 {
+  margin: 0;
+  font-weight: bold;
+}
+
+/* Message transitions */
+.slide-enter-active, .slide-leave-active {
+  transition: bottom .5s linear;
+  bottom: .8rem;
+}
+.slide-enter, .slide-leave-to {
+  bottom: -3rem;
+}
 
 @media (max-width: 576px) {
   .sidebar {

@@ -54,9 +54,9 @@ I've decided that I'll be adding to the online store that I started making for C
   - [ ] search/filter functionality
   - [ ] reporting? (popularity of specific item)
 - [ ] track inventory
-- [ ] add/delete/update items and info
+- [x] add/delete/update items and info
   - [x] add
-  - [ ] delete
+  - [x] delete
   - [x] update
     - [x] add validation
 - [x] sidebar to make getting to different pages easier

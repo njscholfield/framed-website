@@ -1,5 +1,6 @@
 <?php
   session_start();
+  header('Content-Type: application/json');
   // User must be logged in and an Admin to view this page
   if(!isset($_SESSION['userID']) || !isset($_SESSION['role']) || $_SESSION['role'] != 'Admin') {
     echo '{ "status": "error", "message": "Access denied! You must be signed in as an administrator." }';
@@ -41,30 +42,42 @@
 
   $data = json_decode(file_get_contents('php://input'), true);
 
-  if(isset($data) && isset($data['productID'])) {
+  if(isset($data) && isset($data['action'])) {
     if(!isset($_ENV['SERVER_ROOT'])) {
       require('../../partials/env.php');
     }
     require('../../partials/database.php');
 
-    $errors = checkForErrors($data);
-
-    if(!empty($errors)) {
-      echo '{ "successful": false, "errors": '.json_encode($errors).' }';
-      die();
+    if($data['action'] === 'update' || $data['action'] === 'add') {
+      $errors = checkForErrors($data);
+      if(!empty($errors)) {
+        echo '{ "successful": false, "errors": '.json_encode($errors).' }';
+        die();
+      }
     }
 
     $clean = sanitizeInput($connection, $data);
-    // If adding a new item I set the productID field to -1
-    if($data['productID'] == -1) {
-      $updateQuery = "INSERT INTO FramedProducts
-                      (name, photographer, category, color, imageURL, description)
-                      VALUES ('{$clean['name']}', '{$clean['photographer']}', '{$clean['category']}', '{$clean['color']}', '{$clean['imageURL']}', '{$clean['description']}');";
-    } else {
-      $updateQuery = "UPDATE FramedProducts
-                      SET name = '{$clean['name']}', photographer = '{$clean['photographer']}', imageURL = '{$clean['imageURL']}', category = '{$clean['category']}', color = '{$clean['color']}', description = '{$clean['description']}'
-                      WHERE ProductID = {$data['productID']};";
+
+    switch($data['action']) {
+      case 'add':
+        $updateQuery = "INSERT INTO FramedProducts
+                        (name, photographer, category, color, imageURL, description)
+                        VALUES ('{$clean['name']}', '{$clean['photographer']}', '{$clean['category']}', '{$clean['color']}', '{$clean['imageURL']}', '{$clean['description']}');";
+        break;
+      case 'update':
+        $updateQuery = "UPDATE FramedProducts
+                        SET name = '{$clean['name']}', photographer = '{$clean['photographer']}', imageURL = '{$clean['imageURL']}', category = '{$clean['category']}', color = '{$clean['color']}', description = '{$clean['description']}'
+                        WHERE ProductID = {$clean['productID']};";
+        break;
+      case 'delete':
+        $updateQuery = "DELETE FROM FramedProducts
+                        WHERE productID = {$clean['productID']};";
+        break;
+      default:
+        echo '{ "successful": false, "message", "Invalid data" }';
+        die();
     }
+
     $result = mysqli_query($connection, $updateQuery);
     if($result) {
       echo '{ "successful": true, "message": "Successfully updated item" }';
@@ -72,5 +85,8 @@
       echo '{ "successful": false, "message": "Error updating item" }';
     }
     mysqli_close($connection);
+  } else {
+    echo '{ "successful": false, "message", "Invalid data" }';
+    die();
   }
 ?>

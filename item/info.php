@@ -1,16 +1,37 @@
 <?php
+  header('Content-Type: application/json');
   if(!isset($_ENV['SERVER_ROOT'])) {
     require('../partials/env.php');
   }
+  require('../partials/database.php');
+  // Returns in for for a specific item
   if(isset($_GET) && isset($_GET['id'])) {
-    require('../partials/database.php');
+
     $itemQuery = "SELECT * FROM FramedProducts WHERE productID = {$_GET['id']}";
     $itemInfo = mysqli_query($connection, $itemQuery);
 
     if($itemInfo && mysqli_num_rows($itemInfo) == 1) {
-      echo json_encode(mysqli_fetch_assoc($itemInfo), true);
+      echo '{ "successful": true, "itemInfo": '.json_encode(mysqli_fetch_assoc($itemInfo), true).' }';
       mysqli_free_result($itemInfo);
+    } else {
+      echo '{ "successful": false, "message": "Invalid product id." }';
     }
-    mysqli_close($connection);
+  // Returns info for all products if none are specifically requested
+  } else {
+    $allItems = "SELECT productID, name, photographer, description FROM FramedProducts;";
+    $results = mysqli_query($connection, $allItems);
+
+    if($results) {
+      while($row = mysqli_fetch_assoc($results)) {
+        $items[] = $row;
+      }
+      $jsonItems = json_encode($items, true);
+      echo '{ "successful": true, "items": '.$jsonItems.'}';
+      mysqli_free_result($results);
+    } else {
+      echo '{ "successful": false, "message": "Error fetching items" }';
+    }
+
   }
+  mysqli_close($connection);
 ?>
