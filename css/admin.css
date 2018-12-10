@@ -41,9 +41,6 @@
   bottom: .8rem;
   right: .8rem;
 }
-.container {
-  margin-right: 3.5rem;
-}
 img#preview {
   height: 100%;
   width: 100%;
@@ -60,6 +57,9 @@ img#preview {
   margin: 0;
   font-weight: bold;
 }
+.table-responsive {
+    margin-bottom: 3rem;
+ }
 
 /* Message transitions */
 .slide-enter-active, .slide-leave-active {
@@ -87,8 +87,5 @@ img#preview {
   }
   .f-pusher {
     min-height: calc(100vh - 9.3rem);
-  }
-  .table-responsive {
-    margin-bottom: 3rem;
   }
 }
