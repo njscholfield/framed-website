@@ -1,8 +1,17 @@
 const btns = [...document.getElementsByClassName('fav-btn')];
 const favText = '<span class="fas fa-heart"></span> Favorite';
 const favedText = '<span class="fas fa-heart text-danger"></span> Favorited';
+const btnFilter = document.getElementById('btn-filter');
+const filterBox = document.getElementById('filter-options');
 let favorites = [];
 
+// Toggles showing or hiding the filter box
+function toggleFilterBox() {
+  filterBox.classList.toggle('d-none');
+}
+btnFilter.addEventListener('click', toggleFilterBox);
+
+// POSTs favorite change info to server
 async function modifyFavorite(body) {
   const config = {
     method: 'POST',
@@ -19,6 +28,7 @@ async function modifyFavorite(body) {
     .catch(() => { throw new Error('Invalid request'); });
 }
 
+// Changes the appearance of the favorite button to show whether it is favorited or not
 function toggleFavBtn(favBtn, index) {
   if (index !== -1) {
     favBtn.classList.remove('btn-secondary');
@@ -33,6 +43,7 @@ function toggleFavBtn(favBtn, index) {
   }
 }
 
+// Gets the item id and determines whether to add or delete the item from favorites
 function toggleFavorite(e) {
   const index = favorites.indexOf(e.target.dataset.item);
   const body = { itemID: e.target.dataset.item };
@@ -62,6 +73,7 @@ function hideBtns() {
   });
 }
 
+// Fetches the favorites from the database
 function getFavorites() {
   fetch('../favorites/modify.php')
     .then(blob => blob.json())

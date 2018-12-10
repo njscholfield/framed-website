@@ -49,7 +49,7 @@
 
             function print_filter_box($colors, $categories) {
               print <<<HERE
-              <button class="btn btn-link" onclick="$('#filter-options').toggleClass('d-none')">Filter <span class="fas fa-chevron-down"></span></button>
+              <button class="btn btn-link" id="btn-filter">Filter <span class="fas fa-chevron-down"></span></button>
               <div id="filter-options" class="d-none"><ul><li>Category<ul><li>
 HERE;
                 while($catName = mysqli_fetch_array($categories)) {
