@@ -29,16 +29,38 @@
       <div class="container">
         <h4 class="text-danger">Need to add person who ordered each item, another join...</h4>
         <h4 class="text-warning">Filter orders by user, item(reports?), status, date</h4>
+        <form action="" method="get">
+          <div class="form-group">
+            <label>Status</label>
+            <div class="input-group">
+              <select class="form-control" name="status">
+                <option value="">Any</option>
+                <option <?php if(!empty($_GET['status']) && $_GET['status'] == 'Processing') echo 'selected'; ?>>Processing</option>
+                <option <?php if(!empty($_GET['status']) && $_GET['status'] == 'Shipped') echo 'selected'; ?>>Shipped</option>
+                <option <?php if(!empty($_GET['status']) && $_GET['status'] == 'Delivered') echo 'selected'; ?>>Delivered</option>
+              </select>
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Apply</button>
+              </div>
+            </div>
+          </div>
+        </form>
         <?php
           require('../../partials/database.php');
           $orderQuery = "SELECT FramedOrders.orderID, FramedProducts.productID, FramedProducts.name, frame, imageURL, shippingMethod, status, timestamp
                          FROM FramedOrders JOIN FramedOrderItems ON FramedOrders.orderID = FramedOrderItems.orderID
-                                           LEFT JOIN FramedProducts ON FramedProducts.productID = FramedOrderItems.productID;";
+                                           LEFT JOIN FramedProducts ON FramedProducts.productID = FramedOrderItems.productID";
+          if(isset($_GET) && !empty($_GET['status'])) {
+            $statusOptions = ["Processing", "Shipped", "Delivered"];
+            $statusFilter = (in_array($_GET['status'], $statusOptions)) ? $_GET['status'] : null;
+          }  
+        
+         $orderQuery .= (isset($statusFilter)) ? " WHERE status = '{$_GET['status']}';" : ";";
          $orders = mysqli_query($connection, $orderQuery);
-         if(!$orders) {
+         if (!$orders) {
            echo '<h4 class="text-danger">Error loading past orders</h4>';
          } else if(mysqli_num_rows($orders) == 0) {
-           echo '<h4 class="text-info">Looks like you haven\'t ordered anything yet.</h4>';
+           echo '<h4 class="text-info">No matching orders found.</h4>';
          } else {
            echo '<table class="table"><tr><th>Order #</th><th>Item Name</th><th>Frame</th><th>Shipping</th><th>Status</th><th>Date Ordered</th></tr>';
            $last = 0;
