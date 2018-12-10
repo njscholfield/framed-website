@@ -12,7 +12,7 @@
   </style>
 </noscript>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top" id="navbar">
-  <a class="navbar-brand" href="<?php path('/'); ?>"><span class="far fa-images"></span> Framed</a>
+  <a class="navbar-brand" href="<?php path('/'); ?>"><span class="fas fa-images"></span> Framed</a>
   <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" @click="toggleCollapsed">
   <span class="navbar-toggler-icon"></span>
   </button>
