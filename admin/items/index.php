@@ -33,7 +33,7 @@
           </div>
         </transition>
         <button id="btn-add" class="btn btn-success float-right" @click="openEditModal(-1)"><span class="fas fa-plus"></span></button>
-        <div class="table-responsive">
+        <div class="table-responsive" id="item-table">
           <table class="table">
             <tr>
               <th>Name</th>

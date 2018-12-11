@@ -32,75 +32,109 @@
           <div class="card-header text-white bg-success">
             Pending Orders
           </div>
-          <table class="table">
-            <tr>
-              <th>Order #</th>
-              <th>Item Name</th>
-              <th>Customer</th>
-              <th>Frame</th>
-              <th>Shipping</th>
-              <th>Status</th>
-              <th>Date Ordered</th>
-            </tr>
-            <?php
-              $orderQuery = "SELECT FramedOrders.orderID, CONCAT(FramedUsers.firstName, ' ', FramedUsers.lastName) AS custName, FramedProducts.productID, FramedProducts.name, frame, shippingMethod, status, timestamp
-                             FROM FramedOrders JOIN FramedOrderItems ON FramedOrders.orderID = FramedOrderItems.orderID
-                                          LEFT JOIN FramedProducts ON FramedProducts.productID = FramedOrderItems.productID
-                                               JOIN FramedUsers ON FramedOrders.userID = FramedUsers.userID
-                             WHERE status = 'Processing';";
-              $results = mysqli_query($connection, $orderQuery);
-              if($results) {
-                $last = 0;
-                while($row = mysqli_fetch_assoc($results)) {
-                  $orderID = ($last == $row['orderID']) ? '' : $row['orderID']; // only show the order id for the first item
-                  $dateString = date('M j, Y g:i A', strtotime($row['timestamp']));
-                  echo <<<HERE
-                    <tr>
-                     <td>$orderID</td>
-                     <td><a href="{$_ENV["SERVER_ROOT"]}/item/?id={$row['productID']}">{$row['name']}</a></td>
-                     <td>{$row['custName']}</td>
-                     <td>{$row['frame']}</td>
-                     <td>{$row['shippingMethod']}</td>
-                     <td>{$row['status']}</td>
-                     <td>{$dateString}</td>
-                   </tr>
+          <div class="table-responsive">
+            <table class="table">
+              <tr>
+                <th>Order #</th>
+                <th>Item Name</th>
+                <th>Customer</th>
+                <th>Frame</th>
+                <th>Shipping</th>
+                <th>Status</th>
+                <th>Date Ordered</th>
+              </tr>
+              <?php
+                $orderQuery = "SELECT FramedOrders.orderID, CONCAT(FramedUsers.firstName, ' ', FramedUsers.lastName) AS custName, FramedProducts.productID, FramedProducts.name, frame, shippingMethod, status, timestamp
+                               FROM FramedOrders JOIN FramedOrderItems ON FramedOrders.orderID = FramedOrderItems.orderID
+                                            LEFT JOIN FramedProducts ON FramedProducts.productID = FramedOrderItems.productID
+                                                 JOIN FramedUsers ON FramedOrders.userID = FramedUsers.userID
+                               WHERE status = 'Processing';";
+                $results = mysqli_query($connection, $orderQuery);
+                if($results) {
+                  $last = 0;
+                  while($row = mysqli_fetch_assoc($results)) {
+                    $orderID = ($last == $row['orderID']) ? '' : $row['orderID']; // only show the order id for the first item
+                    $dateString = date('M j, Y g:i A', strtotime($row['timestamp']));
+                    echo <<<HERE
+                      <tr>
+                       <td>$orderID</td>
+                       <td><a href="{$_ENV["SERVER_ROOT"]}/item/?id={$row['productID']}">{$row['name']}</a></td>
+                       <td>{$row['custName']}</td>
+                       <td>{$row['frame']}</td>
+                       <td>{$row['shippingMethod']}</td>
+                       <td>{$row['status']}</td>
+                       <td>{$dateString}</td>
+                     </tr>
 HERE;
-                  $last = $row['orderID'];
+                    $last = $row['orderID'];
+                  }
+                  mysqli_free_result($results);
                 }
-                mysqli_free_result($results);
-              }
-            ?>
-          </table>
+              ?>
+            </table>
+          </div>
         </div>
         <br>
         <div class="card">
           <div class="card-header text-white bg-info">
             Contact Form
           </div>
+          <div class="table-responsive">
+            <table class="table">
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Date</th>
+              </tr>
+              <?php
+                $contactQuery = "SELECT name, email, message, timestamp FROM FramedContactForm;";
+                $messages = mysqli_query($connection, $contactQuery);
+
+                if($messages) {
+                  while($row = mysqli_fetch_assoc($messages)) {
+                    $dateString = date('M j, Y g:i A', strtotime($row['timestamp']));
+                    echo <<<HERE
+                      <tr>
+                        <td>{$row['name']}</td>
+                        <td>{$row['email']}</td>
+                        <td>{$row['message']}</td>
+                        <td>{$dateString}</td>
+                      </tr>
+HERE;
+                  }
+                  mysqli_free_result($messages);
+                }
+              ?>
+            </table>
+          </div>
+        </div>
+        <br>
+        <div class="card">
+          <div class="card-header text-white bg-danger">
+            Most Popular Items
+          </div>
           <table class="table">
             <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Message</th>
-              <th>Date</th>
+              <th>Item</th>
+              <th>Number Sold</th>
             </tr>
             <?php
-              $contactQuery = "SELECT name, email, message, timestamp FROM FramedContactForm;";
-              $messages = mysqli_query($connection, $contactQuery);
+              $popularQuery = "SELECT FramedProducts.productID as id, name, count(name) as qty
+                               FROM FramedOrderItems JOIN FramedProducts on FramedOrderItems.productID = FramedProducts.productID
+                               GROUP BY name ORDER BY qty DESC LIMIT 5;";
+              $popItems = mysqli_query($connection, $popularQuery);
 
-              if($messages) {
-                while($row = mysqli_fetch_assoc($messages)) {
-                  $dateString = date('M j, Y g:i A', strtotime($row['timestamp']));
+              if($popItems) {
+                while($row = mysqli_fetch_assoc($popItems)) {
                   echo <<<HERE
                     <tr>
-                      <td>{$row['name']}</td>
-                      <td>{$row['email']}</td>
-                      <td>{$row['message']}</td>
-                      <td>{$dateString}</td>
+                      <td><a href="{$_ENV['SERVER_ROOT']}/item/?id={$row['id']}">{$row['name']}</a></td>
+                      <td>{$row['qty']}</td>
                     </tr>
 HERE;
                 }
-                mysqli_free_result($messages);
+                mysqli_free_result($popItems);
               }
               mysqli_close($connection);
             ?>
