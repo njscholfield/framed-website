@@ -51,6 +51,7 @@
                 <option <?php if(!empty($_GET['status']) && $_GET['status'] == 'Processing') echo 'selected'; ?>>Processing</option>
                 <option <?php if(!empty($_GET['status']) && $_GET['status'] == 'Shipped') echo 'selected'; ?>>Shipped</option>
                 <option <?php if(!empty($_GET['status']) && $_GET['status'] == 'Delivered') echo 'selected'; ?>>Delivered</option>
+                <option <?php if(!empty($_GET['status']) && $_GET['status'] == 'Cancelled') echo 'selected'; ?>>Cancelled</option>
               </select>
               <div class="input-group-append">
                 <button class="btn btn-primary" type="submit">Apply</button>
@@ -59,11 +60,9 @@
           </div>
         </form>
         <?php
-          $orderQuery = "SELECT FramedOrders.orderID, FramedOrders.name AS custName, FramedProducts.productID, FramedProducts.name, frame, shippingMethod, status, timestamp
-                         FROM FramedOrders JOIN FramedOrderItems ON FramedOrders.orderID = FramedOrderItems.orderID
-                                           LEFT JOIN FramedProducts ON FramedProducts.productID = FramedOrderItems.productID";
+          $orderQuery = "SELECT orderID, name, shippingMethod, status, timestamp FROM FramedOrders";
           if(isset($_GET) && !empty($_GET['status'])) {
-            $statusOptions = ["Processing", "Shipped", "Delivered"];
+            $statusOptions = ["Processing", "Shipped", "Delivered", "Cancelled"];
             $statusFilter = (in_array($_GET['status'], $statusOptions)) ? $_GET['status'] : null;
           }
 
@@ -74,23 +73,18 @@
          } else if(mysqli_num_rows($orders) == 0) {
            echo '<h4 class="text-info">No matching orders found.</h4>';
          } else {
-           echo '<table class="table"><tr><th>Order #</th><th>Item Name</th><th>Customer</th><th>Frame</th><th>Shipping</th><th>Status</th><th>Date Ordered</th></tr>';
-           $last = 0;
+           echo '<table class="table"><tr><th>Order #</th><th>Customer</th><th>Shipping</th><th>Status</th><th>Date Ordered</th></tr>';
            while($row = mysqli_fetch_assoc($orders)) {
-             $orderID = ($last == $row['orderID']) ? '' : $row['orderID']; // only show the order id for the first item
              $dateString = date('M j, Y g:i A', strtotime($row['timestamp']));
              echo <<<HERE
              <tr>
-               <td><a class="btn btn-link text-primary" @click="openOrderModal($orderID)">$orderID</a></td>
-               <td><a href="{$_ENV["SERVER_ROOT"]}/item/?id={$row['productID']}">{$row['name']}</a></td>
-               <td>{$row['custName']}</td>
-               <td>{$row['frame']}</td>
+               <td><a class="btn btn-link text-primary" @click="openOrderModal({$row['orderID']})">{$row['orderID']}</a></td>
+               <td>{$row['name']}</td>
                <td>{$row['shippingMethod']}</td>
                <td>{$row['status']}</td>
                <td>{$dateString}</td>
              </tr>
 HERE;
-             $last = $row['orderID'];
            }
            echo "</table>";
            mysqli_free_result($orders);
@@ -135,6 +129,7 @@ HERE;
              <option :selected="orderInfo.status === 'Processing'">Processing</option>
              <option :selected="orderInfo.status === 'Shipped'">Shipped</option>
              <option :selected="orderInfo.status === 'Delivered'">Delivered</option>
+             <option :selected="orderInfo.status === 'Cancelled'">Cancelled</option>
            </select>
          </form>
          <br>

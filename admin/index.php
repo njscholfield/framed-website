@@ -36,36 +36,26 @@
             <table class="table">
               <tr>
                 <th>Order #</th>
-                <th>Item Name</th>
                 <th>Customer</th>
-                <th>Frame</th>
                 <th>Shipping</th>
                 <th>Status</th>
                 <th>Date Ordered</th>
               </tr>
               <?php
-                $orderQuery = "SELECT FramedOrders.orderID, FramedOrders.name AS custName, FramedProducts.productID, FramedProducts.name, frame, shippingMethod, status, timestamp
-                               FROM FramedOrders JOIN FramedOrderItems ON FramedOrders.orderID = FramedOrderItems.orderID
-                                            LEFT JOIN FramedProducts ON FramedProducts.productID = FramedOrderItems.productID
-                               WHERE status = 'Processing';";
+                $orderQuery = "SELECT orderID, name, shippingMethod, status, timestamp FROM FramedOrders WHERE status = 'Processing';";
                 $results = mysqli_query($connection, $orderQuery);
                 if($results) {
-                  $last = 0;
                   while($row = mysqli_fetch_assoc($results)) {
-                    $orderID = ($last == $row['orderID']) ? '' : $row['orderID']; // only show the order id for the first item
                     $dateString = date('M j, Y g:i A', strtotime($row['timestamp']));
                     echo <<<HERE
                       <tr>
-                       <td>$orderID</td>
-                       <td><a href="{$_ENV["SERVER_ROOT"]}/item/?id={$row['productID']}">{$row['name']}</a></td>
-                       <td>{$row['custName']}</td>
-                       <td>{$row['frame']}</td>
+                       <td>{$row['orderID']}</td>
+                       <td>{$row['name']}</td>
                        <td>{$row['shippingMethod']}</td>
                        <td>{$row['status']}</td>
                        <td>{$dateString}</td>
                      </tr>
 HERE;
-                    $last = $row['orderID'];
                   }
                   mysqli_free_result($results);
                 }
