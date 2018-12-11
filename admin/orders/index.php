@@ -20,13 +20,27 @@
       <?php
         include('../../partials/navbar.php');
         include('../../partials/adminSidebar.php');
+        require('../../partials/database.php');
       ?>
       <div class="jumbotron">
         <div class="container">
           <h1 class="display-4">All Orders</h1>
         </div>
       </div>
-      <div class="container">
+      <div class="container" id="vue">
+        <?php
+          if(isset($_POST) && isset($_POST['orderID']) && is_numeric($_POST['orderID'])) {
+            $updateQuery = "UPDATE FramedOrders
+                            SET status = '{$_POST['status']}'
+                            WHERE orderID = {$_POST['orderID']}";
+            $successful = mysqli_query($connection, $updateQuery);
+            if($successful) {
+              echo '<h4 class="text-success">Successfully updated status!</h4>';
+            } else {
+              echo '<h4 class="text-danger">Error updating status!</h4>';
+            }
+          }
+        ?>
         <h4 class="text-warning">Filter orders by user, item(reports?), status, date</h4>
         <form action="" method="get">
           <div class="form-group">
@@ -45,11 +59,9 @@
           </div>
         </form>
         <?php
-          require('../../partials/database.php');
-          $orderQuery = "SELECT FramedOrders.orderID, CONCAT(FramedUsers.firstName, ' ', FramedUsers.lastName) AS custName, FramedProducts.productID, FramedProducts.name, frame, shippingMethod, status, timestamp
+          $orderQuery = "SELECT FramedOrders.orderID, FramedOrders.name AS custName, FramedProducts.productID, FramedProducts.name, frame, shippingMethod, status, timestamp
                          FROM FramedOrders JOIN FramedOrderItems ON FramedOrders.orderID = FramedOrderItems.orderID
-                                           LEFT JOIN FramedProducts ON FramedProducts.productID = FramedOrderItems.productID
-                                                JOIN FramedUsers ON FramedOrders.userID = FramedUsers.userID";
+                                           LEFT JOIN FramedProducts ON FramedProducts.productID = FramedOrderItems.productID";
           if(isset($_GET) && !empty($_GET['status'])) {
             $statusOptions = ["Processing", "Shipped", "Delivered"];
             $statusFilter = (in_array($_GET['status'], $statusOptions)) ? $_GET['status'] : null;
@@ -69,7 +81,7 @@
              $dateString = date('M j, Y g:i A', strtotime($row['timestamp']));
              echo <<<HERE
              <tr>
-               <td>$orderID</td>
+               <td><a class="btn btn-link text-primary" @click="openOrderModal($orderID)">$orderID</a></td>
                <td><a href="{$_ENV["SERVER_ROOT"]}/item/?id={$row['productID']}">{$row['name']}</a></td>
                <td>{$row['custName']}</td>
                <td>{$row['frame']}</td>
@@ -85,8 +97,52 @@ HERE;
          }
          mysqli_close($connection);
        ?>
+       <b-modal ref="orderModal" title="Order Info" @ok="submitForm" ok-title="Save" tabindex="-1" role="dialog" aria-hidden="true">
+         <h6>Order #</h6>
+         <p>{{ orderInfo.orderID }}</p>
+         <h6>Shipping Address</h6>
+         <p class="mb-0">{{ orderInfo.name }}</p>
+         <p class="mb-0">{{ orderInfo.stAddress }}</p>
+         <p class="mb-0">{{ orderInfo.stAddress2 }}</p>
+         <p>{{ orderInfo.city }}, {{ orderInfo.state }} {{ orderInfo.zip}}</p>
+         <h6>Shipping Method</h6>
+         <p>{{ orderInfo.shippingMethod }}</p>
+         <h6>Phone</h6>
+         <p>{{ orderInfo.phone }}</p>
+         <h6>Items Ordered</h6>
+         <div class="table-responsive">
+           <table class="table">
+             <tr>
+               <th>Name</th>
+               <th>Photographer</th>
+               <th>Frame</th>
+               <th>Description</th>
+             </tr>
+             <tr v-for="item in orderInfo.items">
+               <td><a :href="'<?php echo $_ENV['SERVER_ROOT'];?>/item?id=' + item.productID" target="_blank">{{ item.name }}</a></td>
+               <td>{{ item.photographer }}</td>
+               <td>{{ item.frame }}</td>
+               <td>{{ item.description }}</td>
+             </tr>
+           </table>
+         </div>
+         <h6>Order Date</h6>
+         <p>{{ orderInfo.timestamp }}</p>
+         <h6>Order Status</h6>
+         <form action="" method="POST" id="form">
+           <input type="hidden" name="orderID" :value="orderInfo.orderID">
+           <select class="form-control" name="status">
+             <option :selected="orderInfo.status === 'Processing'">Processing</option>
+             <option :selected="orderInfo.status === 'Shipped'">Shipped</option>
+             <option :selected="orderInfo.status === 'Delivered'">Delivered</option>
+           </select>
+         </form>
+         <br>
+       </b-modal>
      </div>
     </div>
     <?php include('../../partials/footer.php'); ?>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="<?php path('/js/orderInfo.js'); ?>"></script>
   </body>
 </html>

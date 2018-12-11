@@ -59,7 +59,13 @@ img#preview {
 }
 #item-table {
     margin-bottom: 3rem;
- }
+}
+.modal-content h6 {
+  font-weight: bold;
+}
+.modal-content p {
+  margin-left: 1rem;
+}
 
 /* Message transitions */
 .slide-enter-active, .slide-leave-active {
