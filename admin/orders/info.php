@@ -20,7 +20,7 @@
     $orderQuery = "SELECT * FROM FramedOrders WHERE orderID = {$_GET['orderID']};";
     $itemQuery = "SELECT FramedOrderItems.productID, name, photographer, frame, description
                   FROM FramedOrderItems JOIN FramedProducts on FramedOrderItems.productID = FramedProducts.productID
-                  WHERE orderID = 4;";
+                  WHERE orderID = {$_GET['orderID']};";
     $order = mysqli_query($connection, $orderQuery);
     $items = mysqli_query($connection, $itemQuery);
 
@@ -30,7 +30,7 @@
       while($row = mysqli_fetch_assoc($items)) {
         $orderedItems[] = $row;
       }
-      $orderInfo['items'] = $orderedItems;
+      $orderInfo['items'] = (isset($orderedItems)) ? $orderedItems : array();
 
       $json = json_encode($orderInfo);
       echo '{ "successful": true, "orderInfo": '.$json.' }';
