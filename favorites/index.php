@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <?php 
+    <?php
       DEFINE("PAGE_TITLE", "Favorites");
       require('../partials/head.php');
       require('../partials/itemCard.php');
@@ -14,7 +14,7 @@
     <?php include('../partials/navbar.php'); ?>
     <div class="jumbotron">
       <div class="container">
-        <h1 class="display-4">Favorites</h1>
+        <h1 class="display-4"><?php if(isset($_GET) && isset($_GET['user'])) echo "{$_GET['user']}'s"; ?> Favorites</h1>
       </div>
     </div>
     <div class="container">
@@ -33,7 +33,7 @@
             echo '<h4 class="text-info">Please login or specify a username to view favorites</h4>';
             die();
           }
-        
+
           function profileIsPublic() {
             global $connection;
             $publicQuery = "SELECT publicProfile FROM FramedUsers WHERE username = '{$_GET['user']}'";
@@ -44,16 +44,16 @@
               return false;
             }
           }
-        
+
           function displayResults() {
             global $connection;
-            $query = "SELECT FramedProducts.productID, name, photographer, category, color, imageURL, description 
+            $query = "SELECT FramedProducts.productID, name, photographer, category, color, imageURL, description
                       FROM FramedProducts JOIN FramedFavorites JOIN FramedUsers
                       ON FramedProducts.productID = FramedFavorites.productID AND FramedUsers.userID = FramedFavorites.userID
                       WHERE username = '{$_GET['user']}'";
-            
+
             $results = mysqli_query($connection, $query);
-            
+
             if($results && mysqli_num_rows($results) != 0) {
               printItemCards($results);
             } else {
