@@ -44,10 +44,9 @@
                 <th>Date Ordered</th>
               </tr>
               <?php
-                $orderQuery = "SELECT FramedOrders.orderID, CONCAT(FramedUsers.firstName, ' ', FramedUsers.lastName) AS custName, FramedProducts.productID, FramedProducts.name, frame, shippingMethod, status, timestamp
+                $orderQuery = "SELECT FramedOrders.orderID, FramedOrders.name AS custName, FramedProducts.productID, FramedProducts.name, frame, shippingMethod, status, timestamp
                                FROM FramedOrders JOIN FramedOrderItems ON FramedOrders.orderID = FramedOrderItems.orderID
                                             LEFT JOIN FramedProducts ON FramedProducts.productID = FramedOrderItems.productID
-                                                 JOIN FramedUsers ON FramedOrders.userID = FramedUsers.userID
                                WHERE status = 'Processing';";
                 $results = mysqli_query($connection, $orderQuery);
                 if($results) {
