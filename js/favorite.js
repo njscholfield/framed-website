@@ -9,7 +9,7 @@ let favorites = [];
 function toggleFilterBox() {
   filterBox.classList.toggle('d-none');
 }
-btnFilter.addEventListener('click', toggleFilterBox);
+if (btnFilter) { btnFilter.addEventListener('click', toggleFilterBox); }
 
 // POSTs favorite change info to server
 async function modifyFavorite(body) {
