@@ -27,7 +27,6 @@
         </div>
       </div>
       <div class="container">
-        <h4 class="text-danger">Need to add person who ordered each item, another join...</h4>
         <h4 class="text-warning">Filter orders by user, item(reports?), status, date</h4>
         <form action="" method="get">
           <div class="form-group">
@@ -47,14 +46,15 @@
         </form>
         <?php
           require('../../partials/database.php');
-          $orderQuery = "SELECT FramedOrders.orderID, FramedProducts.productID, FramedProducts.name, frame, imageURL, shippingMethod, status, timestamp
+          $orderQuery = "SELECT FramedOrders.orderID, CONCAT(FramedUsers.firstName, ' ', FramedUsers.lastName) AS custName, FramedProducts.productID, FramedProducts.name, frame, shippingMethod, status, timestamp
                          FROM FramedOrders JOIN FramedOrderItems ON FramedOrders.orderID = FramedOrderItems.orderID
-                                           LEFT JOIN FramedProducts ON FramedProducts.productID = FramedOrderItems.productID";
+                                           LEFT JOIN FramedProducts ON FramedProducts.productID = FramedOrderItems.productID
+                                                JOIN FramedUsers ON FramedOrders.userID = FramedUsers.userID";
           if(isset($_GET) && !empty($_GET['status'])) {
             $statusOptions = ["Processing", "Shipped", "Delivered"];
             $statusFilter = (in_array($_GET['status'], $statusOptions)) ? $_GET['status'] : null;
-          }  
-        
+          }
+
          $orderQuery .= (isset($statusFilter)) ? " WHERE status = '{$_GET['status']}';" : ";";
          $orders = mysqli_query($connection, $orderQuery);
          if (!$orders) {
@@ -62,7 +62,7 @@
          } else if(mysqli_num_rows($orders) == 0) {
            echo '<h4 class="text-info">No matching orders found.</h4>';
          } else {
-           echo '<table class="table"><tr><th>Order #</th><th>Item Name</th><th>Frame</th><th>Shipping</th><th>Status</th><th>Date Ordered</th></tr>';
+           echo '<table class="table"><tr><th>Order #</th><th>Item Name</th><th>Customer</th><th>Frame</th><th>Shipping</th><th>Status</th><th>Date Ordered</th></tr>';
            $last = 0;
            while($row = mysqli_fetch_assoc($orders)) {
              $orderID = ($last == $row['orderID']) ? '' : $row['orderID']; // only show the order id for the first item
@@ -71,6 +71,7 @@
              <tr>
                <td>$orderID</td>
                <td><a href="{$_ENV["SERVER_ROOT"]}/item/?id={$row['productID']}">{$row['name']}</a></td>
+               <td>{$row['custName']}</td>
                <td>{$row['frame']}</td>
                <td>{$row['shippingMethod']}</td>
                <td>{$row['status']}</td>
