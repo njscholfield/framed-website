@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <?php 
+    <?php
       define("PAGE_TITLE", "Item");
       require('../partials/head.php');
     ?>
@@ -12,10 +12,10 @@
     <div class="f-pusher">
       <?php include('../partials/navbar.php'); ?>
       <div class="container">
-        <?php 
+        <?php
           $itemID = $_GET['id'];
           require('../partials/database.php');
-          
+
           if(isset($_POST) && !empty($_POST['action']) && isset($_SESSION['loggedIn'])) {
             if($_POST['action'] == "AddFavorite") {
               addItemToFavorites($itemID);
@@ -23,7 +23,7 @@
               addItemToCart($itemID);
             }
           }
-          
+
           function addItemToFavorites($itemID) {
             global $connection;
             $insertQuery = "INSERT INTO FramedFavorites VALUES({$_SESSION['userID']}, {$itemID});";
@@ -32,7 +32,7 @@
               echo '<h4 class="text-danger">Error adding item to favorites!</h4>';
             }
           }
-          
+
           function addItemToCart($itemID) {
             // NEED TO COME BACK AND VERIFY PRICE - CAN CURRENTLY CHANGE FORM TO MAKE ITEM $0
             if(!isset($_SESSION['cart'])) {
@@ -41,10 +41,10 @@
               $_SESSION['cart'][$itemID][] = ["frame"=>$_POST['frame'], "price"=>$_POST['price']];
             }
           }
-          
+
           $itemInfoQuery = "SELECT * FROM FramedProducts WHERE productID = {$itemID}";
           $result = mysqli_query($connection, $itemInfoQuery);
-          
+
           if($result && mysqli_num_rows($result) != 0):
           $row = mysqli_fetch_assoc($result); ?>
             <div class="row">
@@ -58,7 +58,7 @@
               </div>
               <div class="col-md-6 img-container">
                 <div class="text-center">
-                  <h1><?php $row['name']; ?></h1>
+                  <h1><?php echo $row['name']; ?></h1>
                   <h3 class="text-muted"><?php echo $row['photographer']; ?></h3>
                   <h5 id="js-price">$10</h5>
                   <p><?php echo $row['description']; ?></p>
@@ -79,7 +79,7 @@
                 </div>
               </div>
             </div>
-          <?php else: ?> 
+          <?php else: ?>
             <h4 class="text-primary">Invalid product id. Try again!</h4>
           <?php endif;
             mysqli_close($connection);
