@@ -1,7 +1,7 @@
 body {
   margin-top: 0;
 }
-footer {
+.footer {
   background-color: #0a0a0a;
   margin-top: 0;
 }
@@ -11,6 +11,10 @@ footer {
 }
 .bg-dark {
   background-color: rgba(10,10,10,.8) !important;
+}
+.dropdown-menu {
+  background-color: rgba(10,10,10,.8) !important;
+
 }
 .full-image {
   width: 100%;
@@ -30,4 +34,10 @@ footer {
   text-shadow: 2px 2px black;
   padding-top: 3.5rem;
   font-weight: 900;
+}
+
+@media(max-width: 576px) {
+  .dropdown-menu {
+    background-color: transparent !important;
+  }
 }
