@@ -1,6 +1,8 @@
 const btns = [...document.getElementsByClassName('fav-btn')];
-const favText = '<span class="fas fa-heart"></span> Favorite';
-const favedText = '<span class="fas fa-heart text-danger"></span> Favorited';
+const favText = '<span class="fas fa-heart"></span>';
+const favTitle = 'Click to favorite this item';
+const favedText = '<span class="fas fa-heart text-danger"></span>';
+const favedTitle = 'Click to unfavorite this item';
 const btnFilter = document.getElementById('btn-filter');
 const filterBox = document.getElementById('filter-options');
 let favorites = [];
@@ -33,12 +35,14 @@ function toggleFavBtn(favBtn, index) {
   if (index !== -1) {
     favBtn.classList.remove('btn-secondary');
     favBtn.classList.add('btn-success');
-    favBtn.innerHTML = favText;
+    favBtn.innerHTML = (favBtn.dataset.type === 'circle') ? favText : `${favText} Favorite`;
+    favBtn.title = favTitle;
     favorites.splice(index, 1);
   } else {
     favBtn.classList.remove('btn-success');
     favBtn.classList.add('btn-secondary');
-    favBtn.innerHTML = favedText;
+    favBtn.innerHTML = (favBtn.dataset.type === 'circle') ? favedText : `${favedText} Favorited`;
+    favBtn.title = favedTitle;
     favorites.push(favBtn.dataset.item);
   }
 }
@@ -61,7 +65,8 @@ function updateBtns(favs) {
     if (favorites.includes(btn.dataset.item)) {
       btn.classList.remove('btn-success');
       btn.classList.add('btn-secondary');
-      btn.innerHTML = favedText;
+      btn.innerHTML = (btn.dataset.type === 'circle') ? favedText : `${favedText} Favorited`;
+      btn.title = favedTitle;
     }
   });
 }

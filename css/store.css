@@ -1,8 +1,17 @@
 .card {
   width: 100%;
   height: 100%;
+  position: relative;
 }
-
+.card-body > .fav-btn {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 100%;
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  opacity: .9;
+}
 #filter-options ul {
   list-style: none;
 }
