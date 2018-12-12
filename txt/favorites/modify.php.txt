@@ -1,8 +1,10 @@
+<!-- This page is the backend for the favorite buttons, it is called using AJAX and returns JSON to the browser -->
 <?php
   session_start();
   header('Content-Type: application/json');
   $data = json_decode(file_get_contents('php://input'), true);
 
+  // Makes sure the user is logged in
   if(!isset($_SESSION) || !isset($_SESSION['userID'])) {
     response(false, "Not logged in");
     die();
@@ -12,6 +14,7 @@
   }
   require('../partials/database.php');
 
+  // Function to send the JSON response back to the browser
   function response($success, $reason) {
     $response['success'] = ($success) ? true : false;
     if(!$success) {
@@ -20,6 +23,7 @@
     echo json_encode($response);
   }
 
+  // Inserts a new favorite into the database.
   function addFavorite($id) {
     global $connection;
     $query = "INSERT INTO FramedFavorites VALUES ({$_SESSION['userID']}, {$id})";
@@ -27,6 +31,7 @@
     response($result, "Cannot add favorite");
   }
 
+  // Deletes a favorite from the database
   function deleteFavorite($id) {
     global $connection;
     $query = "DELETE FROM FramedFavorites WHERE userID = {$_SESSION['userID']} AND productID = {$id}";
@@ -34,6 +39,7 @@
     response($result, "Cannot delete favorite");
   }
 
+  // Gets all favorites for a user and returns them as JSON
   function getFavorites() {
     global $connection;
     $query = "SELECT productID FROM FramedFavorites WHERE userID = {$_SESSION['userID']}";
@@ -54,6 +60,7 @@
     }
   }
 
+  // Calls the appropriate function for each action. 
   switch($data['action']) {
     case 'Add':
       addFavorite($data['itemID']);

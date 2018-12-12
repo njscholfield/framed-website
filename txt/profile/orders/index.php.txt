@@ -24,6 +24,7 @@
       <div class="container">
         <?php
           require('../../partials/database.php');
+          // Query all orders for a user
           $orderQuery = "SELECT FramedOrders.orderID, FramedProducts.productID, FramedProducts.name, frame, imageURL, shippingMethod, status, timestamp
                          FROM FramedOrders JOIN FramedOrderItems ON FramedOrders.orderID = FramedOrderItems.orderID
                                            LEFT JOIN FramedProducts ON FramedProducts.productID = FramedOrderItems.productID
@@ -38,7 +39,7 @@
             $last = 0;
             while($row = mysqli_fetch_assoc($orders)) {
               $orderID = ($last == $row['orderID']) ? '' : $row['orderID']; // only show the order id for the first item
-              $dateString = date('M j, Y g:i A', strtotime($row['timestamp']));
+              $dateString = date('M j, Y g:i A', strtotime($row['timestamp'])); // make timestamp nicer
               echo <<<HERE
               <tr>
                 <td>$orderID</td>

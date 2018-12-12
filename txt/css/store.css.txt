@@ -3,6 +3,7 @@
   height: 100%;
   position: relative;
 }
+/* Style for the round favorite buttons on the store and favorite page */
 .card-body > .fav-btn {
   height: 2.5rem;
   width: 2.5rem;

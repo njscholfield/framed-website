@@ -21,9 +21,12 @@
           <?php
             require('../partials/database.php');
             $query = "SELECT * FROM FramedProducts";
+
+            // queries to show options in filter box
             $colorsQ = "SELECT DISTINCT color FROM FramedProducts";
             $categoriesQ = "SELECT DISTINCT category FROM FramedProducts";
 
+            // Filter results if set in url
             if(isset($_GET['category'])) {
               $query .= " WHERE category='{$_GET['category']}'";
             } else if(isset($_GET['color'])) {
@@ -35,7 +38,7 @@
               $colors = mysqli_query($connection, $colorsQ);
               $categories = mysqli_query($connection, $categoriesQ);
 
-              // filter results
+              // filter options
               print_filter_box($colors, $categories);
 
               printItemCards($results);

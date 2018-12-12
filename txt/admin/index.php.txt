@@ -28,6 +28,7 @@
         </div>
       </div>
       <div class="container">
+        <!-- Shows a table of orders with the status "Pending" -->
         <div class="card">
           <div class="card-header text-white bg-success">
             <span class="fas fa-shipping-fast"></span> Pending Orders
@@ -64,6 +65,7 @@ HERE;
           </div>
         </div>
         <br>
+        <!-- Shows a table of messages submitted to the contact form from the about page -->
         <div class="card">
           <div class="card-header text-white bg-info">
             <span class="fas fa-envelope"></span> Contact Form
@@ -99,6 +101,7 @@ HERE;
           </div>
         </div>
         <br>
+        <!-- Shows a table of the top 5 selling products -->
         <div class="card">
           <div class="card-header text-white bg-danger">
             <span class="fas fa-trophy"></span> Most Popular Items

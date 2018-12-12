@@ -1,4 +1,5 @@
 <noscript>
+  <!-- Makes sure that you can see menu items if javascript is disabled for some reason -->
   <style>
     .navbar-nav {
       flex-direction: row;
@@ -30,12 +31,15 @@
         </li>
       </ul>
       <ul class="navbar-nav">
+        <!-- Only show these items if the user is logged in -->
         <?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true): ?>
           <li class="nav-item">
+            <!-- Profile dropdown, uses BootstrapVue, Vue.js to work -->
             <b-nav-item-dropdown right role="menu">
               <template slot="button-content">
                 <span class="fas fa-user"></span> <?php echo $_SESSION['username']; ?>
               </template>
+              <!-- Only show the link to the admin panel if the user is an admin -->
               <?php if($_SESSION['role'] == "Admin"): ?>
                 <b-dropdown-item class="bg-transparent" href="<?php path('/admin/'); ?>"><span class="fas fa-toolbox"></span> Admin</b-dropdown-item>
               <?php endif; ?>
@@ -58,6 +62,7 @@
           </li>
 
         <?php else: ?>
+          <!-- Show these if the user is not logged in -->
           <div class="ml-auto">
             <a class="btn btn-secondary navbar-btn" href="<?php path('/login/'); ?>">Sign In</a>
             <a class="btn btn-success navbar-btn" href="<?php path('/register/'); ?>">Register</a>

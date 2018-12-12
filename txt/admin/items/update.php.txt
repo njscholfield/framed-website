@@ -1,3 +1,4 @@
+<!-- Backend for the items page. Receives JSON and updates database with changes -->
 <?php
   session_start();
   header('Content-Type: application/json');
@@ -40,7 +41,7 @@
     return $clean;
   }
 
-  $data = json_decode(file_get_contents('php://input'), true);
+  $data = json_decode(file_get_contents('php://input'), true); // Reads JSON
 
   if(isset($data) && isset($data['action'])) {
     if(!isset($_ENV['SERVER_ROOT'])) {
@@ -58,6 +59,7 @@
 
     $clean = sanitizeInput($connection, $data);
 
+    // Builds the correct query for the action being performed
     switch($data['action']) {
       case 'add':
         $updateQuery = "INSERT INTO FramedProducts
