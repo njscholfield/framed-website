@@ -1,5 +1,5 @@
-<!-- Backend for the items page. Receives JSON and updates database with changes -->
 <?php
+  // Backend for the items page. Receives JSON and updates database with changes
   session_start();
   header('Content-Type: application/json');
   // User must be logged in and an Admin to view this page

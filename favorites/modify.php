@@ -1,5 +1,5 @@
-<!-- This page is the backend for the favorite buttons, it is called using AJAX and returns JSON to the browser -->
 <?php
+  // This page is the backend for the favorite buttons, it is called using AJAX and returns JSON to the browser
   session_start();
   header('Content-Type: application/json');
   $data = json_decode(file_get_contents('php://input'), true);
@@ -60,7 +60,7 @@
     }
   }
 
-  // Calls the appropriate function for each action. 
+  // Calls the appropriate function for each action.
   switch($data['action']) {
     case 'Add':
       addFavorite($data['itemID']);

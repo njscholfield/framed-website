@@ -1,5 +1,5 @@
-<!-- This page is the backend for the orders page. It returns all the info for a specific order as JSON -->
 <?php
+  // This page is the backend for the orders page. It returns all the info for a specific order as JSON 
   session_start();
   header('Content-Type: application/json');
   // User must be logged in and an Admin to view this page
