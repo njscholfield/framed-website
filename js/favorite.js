@@ -1,3 +1,4 @@
+// Element variables
 const btns = [...document.getElementsByClassName('fav-btn')];
 const favText = '<span class="fas fa-heart"></span>';
 const favTitle = 'Click to favorite this item';

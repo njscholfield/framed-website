@@ -38,7 +38,7 @@
             $last = 0;
             while($row = mysqli_fetch_assoc($orders)) {
               $orderID = ($last == $row['orderID']) ? '' : $row['orderID']; // only show the order id for the first item
-              $dateString = date('M j, Y g:i A', strtotime($row['timestamp']));
+              $dateString = date('M j, Y g:i A', strtotime($row['timestamp'])); // make timestamp nicer
               echo <<<HERE
               <tr>
                 <td>$orderID</td>

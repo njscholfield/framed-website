@@ -1,3 +1,4 @@
+<!-- Page that returns information about the item in JSON format. Used on the Admin panel to load item info into the edit modal -->
 <?php
   header('Content-Type: application/json');
   if(!isset($_ENV['SERVER_ROOT'])) {

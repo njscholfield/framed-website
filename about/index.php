@@ -44,6 +44,7 @@
             return $clean;
           }
 
+          // Recieves POST data and saves it to database after verifying and sanitizing it
           if(isset($_POST) && isset($_POST['name'])) {
             $errors = checkForErrors();
 

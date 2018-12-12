@@ -2,6 +2,7 @@
   if(!isset($_ENV['SERVER_ROOT'])) {
     require('env.php');
   }
+  // Function that creates full paths so links work locally and on the SIS server where it is not at the root
   function path($path) {
     echo $_ENV['SERVER_ROOT'].$path;
   }

@@ -1,7 +1,5 @@
 .sidebar {
-  /* height: calc(100% - 5.8rem); */
   height: calc(100% - 3.3rem);
-  /* padding-bottom: 2rem; */
   width: 3rem;
   background-color: var(--primary);
   position: fixed;
@@ -67,7 +65,7 @@ img#preview {
   margin-left: 1rem;
 }
 
-/* Message transitions */
+/* Transitions that make the message slide up and down */
 .slide-enter-active, .slide-leave-active {
   transition: bottom .5s linear;
   bottom: .8rem;

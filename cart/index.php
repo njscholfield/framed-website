@@ -31,6 +31,7 @@
             }
           }
 
+          // Displays all items in the cart
           if(!empty($_SESSION['cart'])) {
             require('../partials/database.php');
             $totalPrice = 0;

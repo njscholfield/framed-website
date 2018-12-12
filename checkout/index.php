@@ -14,21 +14,21 @@
   </head>
   <body>
     <div class="f-pusher">
-    <?php  
+    <?php
       include('../partials/navbar.php');
       if(!empty($_POST)) {
         $errors = checkForErrors();
-        
+
         if(empty($errors)) {
           //save to database
           require('../partials/database.php');
-          
+
           // Sanitize data to make sure there are no MySQL or XSS issues
           $sanitized = sanitizeData($connection);
-          
+
           // Insert customer info into Customer table
           $insertOrder = "INSERT INTO FramedOrders (userID, shippingMethod, name, stAddress, stAddress2, city, state, zip, phone)
-                          VALUES ('{$_SESSION['userID']}', '{$sanitized['method']}', '{$sanitized['name']}', 
+                          VALUES ('{$_SESSION['userID']}', '{$sanitized['method']}', '{$sanitized['name']}',
                           '{$sanitized['stAddress']}', '{$sanitized['stAddress2']}', '{$sanitized['city']}', '{$sanitized['state']}', '{$sanitized['zip']}', '{$sanitized['phNum']}');";
           $result = mysqli_query($connection, $insertOrder);
           if(!$result) {
@@ -36,7 +36,7 @@
             die();
           }
           $orderID = mysqli_insert_id($connection); // gets the id of the newly added order
-          
+
           $cartItems = array();
           $insertItems = "INSERT INTO FramedOrderItems (orderID, productID, frame) VALUES ";
           foreach ($_SESSION['cart'] as $itemID => $itemArray) {
@@ -44,8 +44,9 @@
               array_push($cartItems, "($orderID, $itemID, '{$item['frame']}')");
             }
           }
+          // Builds VALUES sets - (orderID, itemID, frame) to be added to the Order Items table
           $insertItems .= implode(", ", $cartItems).";";
-              
+
           $result2 = mysqli_query($connection, $insertItems);
           if(!$result2) {
             echo '<h4 class="text-danger">Error submitting order information. Please try again.</h4>';
@@ -54,7 +55,7 @@
           mysqli_close($connection);
         }
       }
-      
+
       // Function that checks if input is valid
       function checkForErrors() {
         $errors = array();
@@ -85,7 +86,7 @@
         }
         return $errors;
       }
-      
+
       // Function that sanitizes the input data to make sure there are no MySQL or XSS issues
       function sanitizeData() {
         global $connection;

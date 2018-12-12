@@ -33,6 +33,8 @@
 
           return $clean;
         }
+
+        // Check for any invalid input
         function checkForErrors() {
           $errors = array();
 
@@ -60,7 +62,7 @@
 
           $clean = sanitizeInput($connection);
           $errors = checkForErrors();
-          // Query database and check username and password
+
           if(!isset($errors) || empty($errors)) {
             $query = "INSERT INTO FramedUsers (firstName, lastName, username, password, email) VALUES('{$clean['fname']}', '{$clean['lname']}', '{$clean['username']}', '{$clean['hPassword']}', '{$clean['email']}')";
             $result = mysqli_query($connection, $query);

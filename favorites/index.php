@@ -21,19 +21,23 @@
         <?php
           require('../partials/database.php');
           if (isset($_GET) && !empty($_GET['user'])) {
+            // Only show favorites if the user is viewing their own favorites, or the profile is public
             if((isset($_SESSION['userID']) && $_SESSION['username'] == $_GET['user']) || profileIsPublic()) {
               displayResults();
             } else {
               echo '<h4 class="text-danger">Access denied! This profile does not exist or is not public.</h4>';
             }
           } elseif(isset($_SESSION) && isset($_SESSION['username'])) {
+            // show use their own favorites if no user is specified
             $_GET['user'] = $_SESSION['username'];
             displayResults();
           } else {
+            // if user is not logged in and they don't specifiy a username, show an error
             echo '<h4 class="text-info">Please login or specify a username to view favorites</h4>';
             die();
           }
 
+          // Checks whether the user's profile is set to public (or exists)
           function profileIsPublic() {
             global $connection;
             $publicQuery = "SELECT publicProfile FROM FramedUsers WHERE username = '{$_GET['user']}'";
@@ -45,6 +49,7 @@
             }
           }
 
+          // Shows favorited items
           function displayResults() {
             global $connection;
             $query = "SELECT FramedProducts.productID, name, photographer, category, color, imageURL, description

@@ -16,6 +16,7 @@
           $itemID = $_GET['id'];
           require('../partials/database.php');
 
+          // Checks if user is logged in and what action they are trying to perform
           if(isset($_POST) && !empty($_POST['action']) && isset($_SESSION['loggedIn'])) {
             if($_POST['action'] == "AddFavorite") {
               addItemToFavorites($itemID);
@@ -24,6 +25,7 @@
             }
           }
 
+          // Inserts item into favorites table
           function addItemToFavorites($itemID) {
             global $connection;
             $insertQuery = "INSERT INTO FramedFavorites VALUES({$_SESSION['userID']}, {$itemID});";
@@ -33,12 +35,14 @@
             }
           }
 
+          // Adds item into the cart ($_SESSION['cart']) - the data structure is kind of gross but it works
           function addItemToCart($itemID) {
-            // NEED TO COME BACK AND VERIFY PRICE - CAN CURRENTLY CHANGE FORM TO MAKE ITEM $0
+            // Array to lookup prices for each frame
+            $prices = ["None"=>10, "Gray"=>13, "Wood"=>15];
             if(!isset($_SESSION['cart'])) {
-              $_SESSION['cart'] = [$itemID=>[["frame"=>$_POST['frame'], "price"=>$_POST['price']]]];
+              $_SESSION['cart'] = [$itemID=>[["frame"=>$_POST['frame'], "price"=>$prices[$_POST['frame']]]]];
             } else {
-              $_SESSION['cart'][$itemID][] = ["frame"=>$_POST['frame'], "price"=>$_POST['price']];
+              $_SESSION['cart'][$itemID][] = ["frame"=>$_POST['frame'], "price"=>$prices[$_POST['frame']]];
             }
           }
 
@@ -72,7 +76,6 @@
                       <form class="d-inline" method="post">
                         <input type="hidden" name="action" value="AddToCart">
                         <input id="form-frame-type" type="hidden" name="frame" value="None">
-                        <input id="form-price" type="hidden" name="price" value="10">
                         <button type="submit" class="btn btn-primary"><span class="fas fa-cart-plus"></span> Add to Cart</button>
                       </form>
                   <?php endif; ?>

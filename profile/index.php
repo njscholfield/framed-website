@@ -25,6 +25,7 @@
         require('../partials/database.php');
 
         if(!empty($_POST)) {
+          // update a user's favorites page visibility
           if(isset($_POST['visibility'])) {
             // Check for valid input before updating visibility
             if(($_POST['visibility'] == 0 || $_POST['visibility'] == 1)) {
@@ -37,17 +38,22 @@
               }
             }
           } else if(isset($_POST['currentPassword'])) {
+            // get their current password
             $pwQuery = "SELECT password FROM FramedUsers WHERE userID = {$_SESSION['userID']};";
             $result = mysqli_query($connection, $pwQuery);
             $currentPW = mysqli_fetch_assoc($result)['password'];
 
+            // See if they entered their current passwor correctly
             if(!password_verify($_POST['currentPassword'], $currentPW)) {
               $errors['currentPassword'] = "Incorrect current password";
+            // Make sure their new password is the correct length
             } else if(strlen($_POST['newPassword1']) < 8 || strlen($_POST['newPassword1']) > 72) {
               $errors['newPassword1'] = "Password must be 8-72 characters long";
+            // Make sure the new password fields match
             } else if($_POST['newPassword1'] !== $_POST['newPassword2']) {
               $errors['newPassword2'] = "New passwords don't match";
             } else {
+              // If everything is ok, hash the new password and update it in the database
               $newPW = password_hash($_POST['newPassword1'], PASSWORD_DEFAULT);
               $updatePW = "UPDATE FramedUsers
                            SET password = '{$newPW}'

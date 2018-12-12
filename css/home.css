@@ -6,6 +6,7 @@ body {
   margin-top: 0;
 }
 
+/* Makes navbar semi-transparent on home page */
 .bg-transparent {
   background-color: transparent;
 }
