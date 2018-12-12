@@ -1,12 +1,23 @@
 # Framed Website
 
-This a website for my final project in both CS 334 (Intermediate Web Design and Development) and INFSCI 1052 (User-Centered Design)
+This a website for the final project of my capstone web programming course (INFSCI 1059) at the University of Pittsburgh.
 
 #### Stuff I used
+- [PHP](http://php.net/)
 - [Google Fonts](https://fonts.google.com)
-  - [Raleway](https://fonts.google.com/specimen/Raleway) (body font)
+  - [Open Sans](https://fonts.google.com/specimen/Open+Sans) (body font)
   - [Montserrat](https://fonts.google.com/specimen/Montserrat) (heading font)
-
+- [Font Awesome](https://fontawesome.com)
+- [Bootstrap](https://getbootstrap.com)
+  - [Bootswatch Yeti Theme](https://bootswatch.com/yeti/)
+- [Vue.js](https://vuejs.org/)
+  - [BootstrapVue](https://bootstrap-vue.js.org/)
+- [Axios.js](https://github.com/axios/axios)
+- [Unsplash](https://unsplash.com/)
+  - [Album of images I used](https://unsplash.com/collections/1953059/framed)
+- [Heroku](https://heroku.compress)
+- [DevilBox](http://devilbox.org/) (for local development)
+  - [Docker](https://www.docker.com/)
 ---
 
 **I am currently adding on to this project as the final project for my web programming class (INFSCI 1059) at Pitt. Here is my progress so far:**
@@ -27,7 +38,6 @@ I've decided that I'll be adding to the online store that I started making for C
 - [x] make the favorite button actually do something
 - [x] ability to share a favorites page with someone
   - [x] adjust privacy settings
-- [ ] filter/search favorited items (rewrite the filter functionality I have from store page)
 - [x] remove favorited items
 
 #### Account Registration
@@ -43,7 +53,6 @@ I've decided that I'll be adding to the online store that I started making for C
 - [x] add cart icon to navbar
 - [x] make add to cart button actually do something
 - [x] store current cart contents (in $\_SESSION?)
-- [ ] fix price so you can't change it by changing the form
 - [x] add/remove items in the cart
 - [x] checkout
 - [x] order history
@@ -51,16 +60,14 @@ I've decided that I'll be adding to the online store that I started making for C
 #### Admin Panel
 ###### by 12/5
 - [x] view all orders
-  - [ ] search/filter functionality
-  - [ ] reporting? (popularity of specific item)
-- [ ] track inventory
+  - [x] filter functionality
+  - [x] most popular items
 - [x] add/delete/update items and info
   - [x] add
   - [x] delete
   - [x] update
     - [x] add validation
 - [x] sidebar to make getting to different pages easier
-- [ ] ~~if I have extra time I kind of want to explore barcode scanning for fun but we'll see...~~
 
 #### Cleanup
 ###### by 12/11
