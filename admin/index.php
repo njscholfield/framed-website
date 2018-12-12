@@ -30,7 +30,7 @@
       <div class="container">
         <div class="card">
           <div class="card-header text-white bg-success">
-            Pending Orders
+            <span class="fas fa-shipping-fast"></span> Pending Orders
           </div>
           <div class="table-responsive">
             <table class="table">
@@ -66,7 +66,7 @@ HERE;
         <br>
         <div class="card">
           <div class="card-header text-white bg-info">
-            Contact Form
+            <span class="fas fa-envelope"></span> Contact Form
           </div>
           <div class="table-responsive">
             <table class="table">
@@ -101,7 +101,7 @@ HERE;
         <br>
         <div class="card">
           <div class="card-header text-white bg-danger">
-            Most Popular Items
+            <span class="fas fa-trophy"></span> Most Popular Items
           </div>
           <table class="table">
             <tr>
