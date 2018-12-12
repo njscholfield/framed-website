@@ -60,7 +60,7 @@ img#preview {
 #item-table {
     margin-bottom: 3rem;
 }
-.modal-content h6 {
+.modal-content h6 strong {
   font-weight: bold;
 }
 .modal-content p {

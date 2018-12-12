@@ -3,6 +3,7 @@ const orders = new Vue({
   el: '#vue',
   data: {
     orderInfo: {},
+    filterBox: false,
   },
   methods: {
     openOrderModal(id) {
