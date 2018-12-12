@@ -50,7 +50,7 @@
             <div class="row">
               <div class="col-md-6 img-container">
                 <img id="js-img-item" class="none" src="<?php echo $row['imageURL']; ?>" alt="<?php echo $row['name']; ?>">
-                <div class="btn-tray">
+                <div class="btn-group mt-2" role="group" aria-label="Frame options">
                   <button data-class="wood-border" data-price="5" class="btn btn-dark border-toggle">Wood</button>
                   <button data-class="gray-border" data-price="3" class="btn btn-dark border-toggle">Gray</button>
                   <button data-class="none" data-price="0" class="btn btn-dark border-toggle">None</button>
@@ -68,7 +68,7 @@
                       $favResult = mysqli_query($connection, $isFavoritedQuery);
                       $faved = ($favResult && mysqli_num_rows($favResult) != 0) ? 'true' : 'false';
                   ?>
-                      <button data-item="<?php echo $itemID; ?>" class="btn btn-success fav-btn"><span class="fas fa-heart"></span> Favorite</button>
+                      <button data-type="rectangle" data-item="<?php echo $itemID; ?>" class="btn btn-success fav-btn" title="Click to favorite this item"><span class="fas fa-heart"></span> Favorite</button>
                       <form class="d-inline" method="post">
                         <input type="hidden" name="action" value="AddToCart">
                         <input id="form-frame-type" type="hidden" name="frame" value="None">
