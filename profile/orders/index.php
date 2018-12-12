@@ -24,6 +24,7 @@
       <div class="container">
         <?php
           require('../../partials/database.php');
+          // Query all orders for a user
           $orderQuery = "SELECT FramedOrders.orderID, FramedProducts.productID, FramedProducts.name, frame, imageURL, shippingMethod, status, timestamp
                          FROM FramedOrders JOIN FramedOrderItems ON FramedOrders.orderID = FramedOrderItems.orderID
                                            LEFT JOIN FramedProducts ON FramedProducts.productID = FramedOrderItems.productID

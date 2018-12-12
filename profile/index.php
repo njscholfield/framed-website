@@ -92,6 +92,7 @@
           </div>
         </form>
         <?php
+          // Get current favorite page visibilty
           $visibilityQuery = "SELECT publicProfile FROM FramedUsers WHERE userID = {$_SESSION['userID']};";
           $result = mysqli_query($connection, $visibilityQuery);
           $data = mysqli_fetch_assoc($result);
