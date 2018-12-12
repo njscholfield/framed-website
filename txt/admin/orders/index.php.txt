@@ -42,11 +42,11 @@
           }
         ?>
         <button class="btn btn-link" @click="filterBox = !filterBox">Filter <span class="fas fa-chevron-down"></span></button>
-        <form action="" method="get" v-show="filterBox">
+        <form action="" method="get" v-show="filterBox" id="filterForm">
           <div class="form-inline my-3 mx-3">
             <div class="form-group mx-2">
               <label>Status</label>
-              <select class="form-control mx-2" name="status">
+              <select class="form-control mx-2" name="status" @input="updateFilter">
                 <option value="">Any</option>
                 <option <?php if(!empty($_GET['status']) && $_GET['status'] == 'Processing') echo 'selected'; ?>>Processing</option>
                 <option <?php if(!empty($_GET['status']) && $_GET['status'] == 'Shipped') echo 'selected'; ?>>Shipped</option>
@@ -55,13 +55,12 @@
               </select>
             </div>
             <div class="form-check mx-2 mb-2">
-              <input class="form-check-input" type="checkbox" value="" name="desc" <?php if(isset($_GET['desc'])) echo 'checked'; ?>>
+              <input class="form-check-input" type="checkbox" value="" name="desc" <?php if(isset($_GET['desc'])) echo 'checked'; ?> @input="updateFilter">
               <label class="form-check-label" for="desc">
                 Sort in descending order
               </label>
             </div>
             <div class="form-group">
-              <button class="btn btn-primary" type="submit"><span class="fas fa-filter"></span> Apply</button>
               <a class="btn btn-dark ml-2" href="."><span class="fas fa-times"></span> Clear</a>
             </div>
           </div>

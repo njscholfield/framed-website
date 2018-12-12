@@ -20,5 +20,8 @@ const orders = new Vue({
     submitForm() {
       document.getElementById('form').submit();
     },
+    updateFilter() {
+      document.getElementById('filterForm').submit();
+    },
   },
 });
