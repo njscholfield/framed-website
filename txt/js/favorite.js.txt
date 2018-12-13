@@ -50,11 +50,12 @@ function toggleFavBtn(favBtn, index) {
 
 // Gets the item id and determines whether to add or delete the item from favorites
 function toggleFavorite(e) {
-  const index = favorites.indexOf(e.target.dataset.item);
-  const body = { itemID: e.target.dataset.item };
+  const target = e.currentTarget;
+  const index = favorites.indexOf(target.dataset.item);
+  const body = { itemID: target.dataset.item };
   body.action = (index !== -1) ? 'Delete' : 'Add';
   modifyFavorite(body)
-    .then(() => { toggleFavBtn(e.target, index); })
+    .then(() => { toggleFavBtn(target, index); })
     .catch(() => console.error('Error favoriting'));
 }
 
