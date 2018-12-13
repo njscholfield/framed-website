@@ -4,6 +4,7 @@
   background-color: var(--primary);
   position: fixed;
   left: 0;
+  z-index: 1020;
 }
 .sidebar-container {
   height: 100%;
@@ -38,6 +39,7 @@
   position: fixed;
   bottom: .8rem;
   right: .8rem;
+  z-index: 1010;
 }
 img#preview {
   height: 100%;
