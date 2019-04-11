@@ -4,7 +4,7 @@ This a website for the final project of my capstone web programming course (INFS
 
 *NOTE: Although you can add items to your cart and checkout, there is no payment or actual ordering taking place so don't expect a print to show up at your door.*
 
-*If you want to run this project locally on your own computer see the `Setup.md` file in this repository for some instructions on how to do that.*
+*If you want to run this project locally on your own computer see the `SETUP.md` file in this repository for some instructions on how to do that.*
 
 ---
 
