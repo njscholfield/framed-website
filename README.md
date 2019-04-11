@@ -4,6 +4,8 @@ This a website for the final project of my capstone web programming course (INFS
 
 *NOTE: Although you can add items to your cart and checkout, there is no payment or actual ordering taking place so don't expect a print to show up at your door.*
 
+*If you want to run this project locally on your own computer see the `Setup.md` file in this repository for some instructions on how to do that.*
+
 ---
 
 ### Project Features
@@ -53,8 +55,8 @@ Admin users can see and update the status of all orders. They can also filter (c
 Admin users can also view, update, add, and delete items for sale in the store. Clicking the *pencil icon* next to each item opens a modal to update any of the item info. At the bottom of the update modal there is also a *delete button* to delete an item. To add a new item you click on the *green + button*, which opens a blank form to add a new item to the store.
 
 #### Stuff I used
-- PHP
-- MySQL
+- [PHP](https://www.php.net/)
+- [MySQL](https://www.mysql.com/)
 - [Google Fonts](https://fonts.google.com)
   - [Open Sans](https://fonts.google.com/specimen/Open+Sans) (body font)
   - [Montserrat](https://fonts.google.com/specimen/Montserrat) (heading font)
