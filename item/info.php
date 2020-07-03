@@ -19,7 +19,7 @@
     }
   // Returns info for all products if none are specifically requested
   } else {
-    $allItems = "SELECT productID, name, photographer, description FROM FramedProducts;";
+    $allItems = "SELECT productID, name, photographer, description, imageURL FROM FramedProducts;";
     $results = mysqli_query($connection, $allItems);
 
     if($results) {
