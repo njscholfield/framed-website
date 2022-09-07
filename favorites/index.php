@@ -4,14 +4,14 @@
   <head>
     <?php
       DEFINE("PAGE_TITLE", "Favorites");
-      require('../partials/head.php');
-      require('../partials/itemCard.php');
+      require('/workspace/partials/head.php');
+      require('/workspace/partials/itemCard.php');
     ?>
     <link rel="stylesheet" href="<?php path('/css/store.css'); ?>">
   </head>
   <body>
     <div class="f-pusher">
-    <?php include('../partials/navbar.php'); ?>
+    <?php include('/workspace/partials/navbar.php'); ?>
     <div class="jumbotron">
       <div class="container">
         <h1 class="display-4"><?php if(isset($_GET) && isset($_GET['user'])) echo "{$_GET['user']}'s"; ?> Favorites</h1>
@@ -19,7 +19,7 @@
     </div>
     <div class="container">
         <?php
-          require('../partials/database.php');
+          require('/workspace/partials/database.php');
           if (isset($_GET) && !empty($_GET['user'])) {
             // Only show favorites if the user is viewing their own favorites, or the profile is public
             if((isset($_SESSION['userID']) && $_SESSION['username'] == $_GET['user']) || profileIsPublic()) {
@@ -71,6 +71,6 @@
     </div>
   </div>
     <script src="<?php path('/js/favorite.js'); ?>"></script>
-    <?php include('../partials/footer.php'); ?>
+    <?php include('/workspace/partials/footer.php'); ?>
   </body>
 </html>

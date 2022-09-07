@@ -4,14 +4,14 @@
   <head>
     <?php
       DEFINE("PAGE_TITLE", "Store");
-      require('../partials/head.php');
-      require('../partials/itemCard.php');
+      require('/workspace/partials/head.php');
+      require('/workspace/partials/itemCard.php');
     ?>
     <link rel="stylesheet" href="<?php path('/css/store.css'); ?>">
   </head>
   <body>
     <div class="f-pusher">
-      <?php include('../partials/navbar.php'); ?>
+      <?php include('/workspace/partials/navbar.php'); ?>
       <div class="jumbotron">
         <div class="container">
           <h1 class="display-4">Store</h1>
@@ -19,7 +19,7 @@
       </div>
       <div class="container">
           <?php
-            require('../partials/database.php');
+            require('/workspace/partials/database.php');
             $query = "SELECT * FROM FramedProducts";
 
             // queries to show options in filter box
@@ -69,6 +69,6 @@ HERE;
       </div>
     </div>
     <script src="<?php path('/js/favorite.js'); ?>"></script>
-    <?php include('../partials/footer.php'); ?>
+    <?php include('/workspace/partials/footer.php'); ?>
   </body>
 </html>

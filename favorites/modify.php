@@ -10,9 +10,9 @@
     die();
   }
   if(!isset($_ENV['SERVER_ROOT'])) {
-    require('../partials/env.php');
+    require('/workspace/partials/env.php');
   }
-  require('../partials/database.php');
+  require('/workspace/partials/database.php');
 
   // Function to send the JSON response back to the browser
   function response($success, $reason) {

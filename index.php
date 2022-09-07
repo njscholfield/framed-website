@@ -4,7 +4,7 @@
   <head>
     <?php
       DEFINE("PAGE_TITLE", "Home");
-      require('./partials/head.php');
+      require('/workspace/partials/head.php');
     ?>
     <link rel="stylesheet" href="<?php path('/css/home.css'); ?>">
   </head>
@@ -15,6 +15,6 @@
         <h1 class="display-4">Put these images on your wall</h1>
       </div>
     </div>
-    <?php include('./partials/footer.php'); ?>
+    <?php include('/workspace/partials/footer.php'); ?>
   </body>
 </html>

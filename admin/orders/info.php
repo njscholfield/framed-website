@@ -9,9 +9,9 @@
   }
 
   if(!isset($_ENV['SERVER_ROOT'])) {
-    require('../../partials/env.php');
+    require('/workspace/partials/env.php');
   }
-  require('../../partials/database.php');
+  require('/workspace/partials/database.php');
 
   // Order is specified by a GET variable
   if(isset($_GET) && isset($_GET['orderID'])) {

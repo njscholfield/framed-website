@@ -36,7 +36,7 @@ const admin = new Vue({
         return;
       }
       // get info for the specific item
-      axios.get(`../../item/info.php/?id=${id}`)
+      axios.get(`../../item/info.php?id=${id}`)
         .then(response => response.data)
         .then((data) => {
           if (data.successful) {

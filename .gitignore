@@ -1,3 +1,5 @@
 .DS_Store
 partials/env.php
 /vendor/
+app.yaml
+homework2a.php

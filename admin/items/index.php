@@ -11,15 +11,15 @@
   <head>
     <?php
       define("PAGE_TITLE", "Items");
-      require('../../partials/head.php');
+      require('/workspace/partials/head.php');
     ?>
     <link rel="stylesheet" href="<?php path('/css/admin.css'); ?>">
   </head>
   <body>
     <div class="f-pusher">
       <?php
-        include('../../partials/navbar.php');
-        include('../../partials/adminSidebar.php');
+        include('/workspace/partials/navbar.php');
+        include('/workspace/partials/adminSidebar.php');
       ?>
       <div class="jumbotron">
         <div class="container">

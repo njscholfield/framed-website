@@ -4,13 +4,13 @@
   <head>
     <?php
       DEFINE("PAGE_TITLE", "About");
-      require('../partials/head.php');
+      require('/workspace/partials/head.php');
     ?>
-    <link rel="stylesheet" href="<?php path('/css/about.css'); ?>">
+
   </head>
   <body>
     <div class="f-pusher">
-      <?php include('../partials/navbar.php'); ?>
+      <?php include('/workspace/partials/navbar.php'); ?>
       <div class="jumbotron">
         <div class="container">
           <h1 class="display-4">About Us</h1>
@@ -18,7 +18,7 @@
       </div>
       <div class="container">
         <?php
-          require('../partials/database.php');
+          require('/workspace/partials/database.php');
 
           // Function that checks if input is valid
           function checkForErrors() {
@@ -97,6 +97,6 @@
         </div>
       </div>
     </div>
-    <?php include('../partials/footer.php'); ?>
+    <?php include('/workspace/partials/footer.php'); ?>
   </body>
 </html>

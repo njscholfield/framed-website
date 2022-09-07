@@ -10,11 +10,11 @@
   <head>
     <?php
       define("PAGE_TITLE", "Account Settings");
-      require('../partials/head.php');
+      require('/workspace/partials/head.php');
     ?>
   </head>
   <body>
-    <?php include('../partials/navbar.php'); ?>
+    <?php include('/workspace/partials/navbar.php'); ?>
     <div class="jumbotron">
       <div class="container">
         <h1 class="display-4">Account Settings</h1>
@@ -22,7 +22,7 @@
     </div>
     <div class="container">
       <?php
-        require('../partials/database.php');
+        require('/workspace/partials/database.php');
 
         if(!empty($_POST)) {
           // update a user's favorites page visibility
@@ -120,6 +120,6 @@
         ?>
       <a class="btn btn-danger" href="<?php path('/logout/'); ?>">Log Out</a>
     </div>
-    <?php include('../partials/footer.php'); ?>
+    <?php include('/workspace/partials/footer.php'); ?>
   </body>
 </html>

@@ -11,13 +11,13 @@
   <head>
     <?php
       define('PAGE_TITLE', 'Login');
-      include('../partials/head.php');
+      include('/workspace/partials/head.php');
     ?>
     <title>Login | Noah Scholfield</title>
   </head>
   <body>
     <div class="f-pusher">
-      <?php include('../partials/navbar.php'); ?>
+      <?php include('/workspace/partials/navbar.php'); ?>
       <div class="jumbotron">
         <div class="container">
           <h1 class="display-4">Sign In</h1>
@@ -26,7 +26,7 @@
       <div class="container">
         <?php
           if(!empty($_POST)) {
-            require('../partials/database.php');
+            require('/workspace/partials/database.php');
 
             // Query database and check username and password
             $sanitizedUsername = mysqli_escape_string($connection, $_POST['username']);
@@ -74,6 +74,6 @@
         </form>
       </div>
     </div>
-    <?php include('../partials/footer.php'); ?>
+    <?php include('/workspace/partials/footer.php'); ?>
   </body>
 </html>

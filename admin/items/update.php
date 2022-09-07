@@ -45,9 +45,9 @@
 
   if(isset($data) && isset($data['action'])) {
     if(!isset($_ENV['SERVER_ROOT'])) {
-      require('../../partials/env.php');
+      require('/workspace/partials/env.php');
     }
-    require('../../partials/database.php');
+    require('/workspace/partials/database.php');
 
     if($data['action'] === 'update' || $data['action'] === 'add') {
       $errors = checkForErrors($data);

@@ -11,11 +11,11 @@
   <head>
     <?php
       define('PAGE_TITLE', 'Register');
-      include('../partials/head.php');
+      include('/workspace/partials/head.php');
     ?>
   </head>
   <body>
-    <?php include('../partials/navbar.php'); ?>
+    <?php include('/workspace/partials/navbar.php'); ?>
     <div class="jumbotron">
       <div class="container">
         <h1 class="display-4">Register</h1>
@@ -58,7 +58,7 @@
         }
 
         if(!empty($_POST)) {
-          require('../partials/database.php');
+          require('/workspace/partials/database.php');
 
           $clean = sanitizeInput($connection);
           $errors = checkForErrors();
@@ -114,6 +114,6 @@
         </div>
       </form>
     </div>
-    <?php include('../partials/footer.php'); ?>
+    <?php include('/workspace/partials/footer.php'); ?>
   </body>
 </html>

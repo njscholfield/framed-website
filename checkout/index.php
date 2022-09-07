@@ -9,19 +9,19 @@
   <head>
     <?php
       define("PAGE_TITLE", "Checkout");
-      require('../partials/head.php');
+      require('/workspace/partials/head.php');
     ?>
   </head>
   <body>
     <div class="f-pusher">
     <?php
-      include('../partials/navbar.php');
+      include('/workspace/partials/navbar.php');
       if(!empty($_POST)) {
         $errors = checkForErrors();
 
         if(empty($errors)) {
           //save to database
-          require('../partials/database.php');
+          require('/workspace/partials/database.php');
 
           // Sanitize data to make sure there are no MySQL or XSS issues
           $sanitized = sanitizeData($connection);
@@ -164,7 +164,7 @@
       <?php $_SESSION['cart'] = array(); ?>
     </div>
     <?php endif;
-      include('../partials/footer.php');
+      include('/workspace/partials/footer.php');
     ?>
   </body>
 </html>

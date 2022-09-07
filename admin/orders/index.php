@@ -11,16 +11,16 @@
   <head>
     <?php
       define("PAGE_TITLE", "All Orders");
-      require('../../partials/head.php');
+      require('/workspace/partials/head.php');
     ?>
     <link rel="stylesheet" href="<?php path('/css/admin.css'); ?>">
   </head>
   <body>
     <div class="f-pusher">
       <?php
-        include('../../partials/navbar.php');
-        include('../../partials/adminSidebar.php');
-        require('../../partials/database.php');
+        include('/workspace/partials/navbar.php');
+        include('/workspace/partials/adminSidebar.php');
+        require('/workspace/partials/database.php');
       ?>
       <div class="jumbotron">
         <div class="container">
@@ -146,7 +146,7 @@ HERE;
        </b-modal>
      </div>
     </div>
-    <?php include('../../partials/footer.php'); ?>
+    <?php include('/workspace/partials/footer.php'); ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="<?php path('/js/orderInfo.js'); ?>"></script>
   </body>

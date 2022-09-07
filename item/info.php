@@ -2,9 +2,9 @@
   // Page that returns information about the item in JSON format. Used on the Admin panel to load item info into the edit modal
   header('Content-Type: application/json');
   if(!isset($_ENV['SERVER_ROOT'])) {
-    require('../partials/env.php');
+    require('/workspace/partials/env.php');
   }
-  require('../partials/database.php');
+  require('/workspace/partials/database.php');
   // Returns in for for a specific item
   if(isset($_GET) && isset($_GET['id'])) {
 

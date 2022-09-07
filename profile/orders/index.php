@@ -1,7 +1,7 @@
 <?php
   session_start();
   if(!isset($_SESSION['userID'])) {
-    header("Location: ../../");
+    header("Location: /workspace//workspace/");
     die();
   }
 ?>
@@ -10,12 +10,12 @@
   <head>
     <?php
       define("PAGE_TITLE", "My Orders");
-      require('../../partials/head.php');
+      require('/workspace/partials/head.php');
     ?>
   </head>
   <body>
     <div class="f-pusher">
-      <?php require('../../partials/navbar.php'); ?>
+      <?php require('/workspace/partials/navbar.php'); ?>
       <div class="jumbotron">
         <div class="container">
           <h1 class="display-4">My Orders</h1>
@@ -23,7 +23,7 @@
       </div>
       <div class="container">
         <?php
-          require('../../partials/database.php');
+          require('/workspace/partials/database.php');
           // Query all orders for a user
           $orderQuery = "SELECT FramedOrders.orderID, FramedProducts.productID, FramedProducts.name, frame, imageURL, shippingMethod, status, timestamp
                          FROM FramedOrders JOIN FramedOrderItems ON FramedOrders.orderID = FramedOrderItems.orderID
@@ -59,6 +59,6 @@ HERE;
         ?>
       </div>
     </div>
-    <?php include('../../partials/footer.php'); ?>
+    <?php include('/workspace/partials/footer.php'); ?>
   </body>
 </html>

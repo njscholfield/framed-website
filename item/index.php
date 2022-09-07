@@ -4,17 +4,17 @@
   <head>
     <?php
       define("PAGE_TITLE", "Item");
-      require('../partials/head.php');
+      require('/workspace/partials/head.php');
     ?>
     <link rel="stylesheet" href="<?php path('/css/item.css'); ?>">
   </head>
   <body>
     <div class="f-pusher">
-      <?php include('../partials/navbar.php'); ?>
+      <?php include('/workspace/partials/navbar.php'); ?>
       <div class="container">
         <?php
           $itemID = $_GET['id'];
-          require('../partials/database.php');
+          require('/workspace/partials/database.php');
 
           // Checks if user is logged in and what action they are trying to perform
           if(isset($_POST) && !empty($_POST['action']) && isset($_SESSION['loggedIn'])) {
@@ -89,7 +89,7 @@
           ?>
       </div>
     </div>
-    <?php include('../partials/footer.php'); ?>
+    <?php include('/workspace/partials/footer.php'); ?>
     <script src="<?php path('/js/item.js'); ?>"></script>
     <script src="<?php path('/js/favorite.js'); ?>"></script>
   </body>

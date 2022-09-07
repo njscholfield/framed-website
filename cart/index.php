@@ -4,13 +4,13 @@
   <head>
     <?php
       define("PAGE_TITLE", "Cart");
-      require('../partials/head.php');
+      require('/workspace/partials/head.php');
     ?>
     <link rel="stylesheet" href="<?php path('/css/cart.css'); ?>">
   </head>
   <body>
     <div class="f-pusher">
-      <?php include('../partials/navbar.php'); ?>
+      <?php include('/workspace/partials/navbar.php'); ?>
       <div class="jumbotron">
         <div class="container">
           <h1 class="display-4">Cart</h1>
@@ -33,7 +33,7 @@
 
           // Displays all items in the cart
           if(!empty($_SESSION['cart'])) {
-            require('../partials/database.php');
+            require('/workspace/partials/database.php');
             $totalPrice = 0;
             $ids = join(", ", array_keys($_SESSION['cart'])); // lookup the product info for only the items in the cart
             $itemsQuery = "SELECT productID, name, photographer, imageURL FROM FramedProducts WHERE productID IN ($ids);";
@@ -79,6 +79,6 @@ HERE;
         ?>
       </div>
     </div>
-    <?php include('../partials/footer.php') ?>
+    <?php include('/workspace/partials/footer.php') ?>
   </body>
 </html>
