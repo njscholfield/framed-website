@@ -114,7 +114,7 @@ HERE;
             <?php
               $popularQuery = "SELECT FramedProducts.productID as id, name, count(name) as qty
                                FROM FramedOrderItems JOIN FramedProducts on FramedOrderItems.productID = FramedProducts.productID
-                               GROUP BY name ORDER BY qty DESC LIMIT 5;";
+                               GROUP BY id ORDER BY qty DESC LIMIT 5;";
               $popItems = mysqli_query($connection, $popularQuery);
 
               if($popItems) {
